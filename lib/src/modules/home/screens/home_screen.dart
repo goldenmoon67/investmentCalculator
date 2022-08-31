@@ -12,16 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/home_screen_bloc.dart';
 
-class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeScreenBloc()..add(HomeScreenStartEvent()),
-      child: this,
-    );
-  }
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -61,25 +53,33 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = getInitial(context);
-    return BlocConsumer<HomeScreenBloc, HomeScreenState>(
-      listener: (context, state) {
-        if (state is PercentCalculateData) {
-          AutoRouter.of(context)
-              .push(PercentResultScreenRoute(percentResult: state.resultModel));
-        }
-        if (state is PriceCalculateData) {
-          AutoRouter.of(context)
-              .push(PriceResultScreenRoute(priceResult: state.resultModel));
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          resizeToAvoidBottomInset: false,
-          body: content,
-        );
-      },
+    return BlocProvider(
+      create: (context) => HomeScreenBloc()..add(HomeScreenStartEvent()),
+      child: BlocConsumer<HomeScreenBloc, HomeScreenState>(
+        listener: (context, state) {
+          if (state is PercentCalculateData) {
+            AutoRouter.of(context).push(
+                PercentResultScreenRoute(percentResult: state.resultModel));
+          }
+          if (state is PriceCalculateData) {
+            AutoRouter.of(context)
+                .push(PriceResultScreenRoute(priceResult: state.resultModel));
+          }
+        },
+        buildWhen: (previous, state) {
+          return (state is HomeScreenInitial ||
+              state is PriceCalculateData ||
+              state is PercentCalculateData);
+        },
+        builder: (context, state) {
+          Widget content = getInitial(context);
+          return Scaffold(
+            backgroundColor: Colors.white,
+            resizeToAvoidBottomInset: false,
+            body: content,
+          );
+        },
+      ),
     );
   }
 
@@ -93,9 +93,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: <Widget>[
               const SizedBox(
                 height: 80,
-              ),
-              const SizedBox(
-                height: 40,
               ),
               TabbarWidget(tabController: _tabController),
               const SizedBox(
