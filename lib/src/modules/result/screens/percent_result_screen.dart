@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 
 import 'package:flutter/material.dart';
@@ -7,18 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../bloc/result_screen_bloc.dart';
 
-class PercentResultScreen extends StatefulWidget implements AutoRouteWrapper {
+class PercentResultScreen extends StatefulWidget {
   final PercentResult percentResult;
   const PercentResultScreen({Key? key, required this.percentResult})
       : super(key: key);
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ResultScreenBloc()..add(ResultScreenStartEvent()),
-      child: this,
-    );
-  }
 
   @override
   State<PercentResultScreen> createState() => _PercentResultScreenState();
@@ -29,19 +20,22 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
   Widget build(BuildContext context) {
     Widget content = getCalculateData(context);
 
-    return BlocConsumer<ResultScreenBloc, ResultScreenState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
+    return BlocProvider(
+      create: (context) => ResultScreenBloc(),
+      child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+            ),
             backgroundColor: Colors.white,
-            elevation: 0,
-          ),
-          backgroundColor: Colors.white,
-          resizeToAvoidBottomInset: false,
-          body: content,
-        );
-      },
+            resizeToAvoidBottomInset: false,
+            body: content,
+          );
+        },
+      ),
     );
   }
 
@@ -51,7 +45,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
         height: 500,
         width: 350,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(30),
               bottomLeft: Radius.circular(30),
             ),
@@ -61,15 +55,15 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                 Colors.blue.shade400,
                 Colors.blue.shade900
               ],
-              stops: [
+              stops: const [
                 0.0,
                 0.5,
                 0.8,
               ],
             )),
         child: Container(
-          margin: EdgeInsets.all(4),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.all(4),
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(30),
@@ -77,7 +71,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -118,7 +112,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                       Colors.blue.shade900,
                       Colors.grey,
                     ],
-                    stops: [
+                    stops: const [
                       0.0,
                       1.0,
                     ],
@@ -132,7 +126,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                         color: Colors.black,
                       ),
                       children: <TextSpan>[
-                        TextSpan(text: "Profit you want:"),
+                        const TextSpan(text: "Profit you want:"),
                         TextSpan(
                             text: widget.percentResult.percentWeWant.toString(),
                             style:
@@ -153,29 +147,30 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                       TextSpan(
                           text: widget.percentResult.investmentName,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
+                      const TextSpan(
                           text: " = ",
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
                           text: widget.percentResult.lastPrice.toString(),
                           style: const TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
+                      const TextSpan(
                           text: " to win ",
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
                           text: widget.percentResult.percentWeWant.toString(),
                           style: const TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
+                      const TextSpan(
                         text: "% more ",
                       )
                     ],
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {}, child: Text("Save This investment")),
+                    onPressed: () {},
+                    child: const Text("Save This investment")),
                 TextButton(
                   onPressed: () {},
-                  child: Text("Back to Main page"),
+                  child: const Text("Back to Main page"),
                 ),
               ],
             ),

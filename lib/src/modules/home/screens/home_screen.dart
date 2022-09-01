@@ -1,6 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
-import 'package:crypto_price/src/utils/navigation/app_router.dart';
+import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
+import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
+import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
 import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';
@@ -9,6 +10,7 @@ import 'package:crypto_price/src/widgets/tabbars/views/percent_tabview.dart';
 import 'package:crypto_price/src/widgets/tabbars/views/price_tabview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../bloc/home_screen_bloc.dart';
 
@@ -58,12 +60,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: BlocConsumer<HomeScreenBloc, HomeScreenState>(
         listener: (context, state) {
           if (state is PercentCalculateData) {
-            AutoRouter.of(context).push(
-                PercentResultScreenRoute(percentResult: state.resultModel));
+            pushNewScreen(
+              context,
+              screen: PercentResultScreen(
+                percentResult: state.resultModel,
+              ),
+              withNavBar: true, // OPTIONAL VALUE. True by default.
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
           }
           if (state is PriceCalculateData) {
-            AutoRouter.of(context)
-                .push(PriceResultScreenRoute(priceResult: state.resultModel));
+            AppRouter.pushScreeen(
+                context, PriceResultScreen(priceResult: state.resultModel));
           }
         },
         buildWhen: (previous, state) {
