@@ -3,8 +3,19 @@ part of 'home_screen_bloc.dart';
 abstract class HomeScreenEvent extends Equatable {}
 
 class HomeScreenStartEvent extends HomeScreenEvent {
+  final BuildContext context;
+
+  HomeScreenStartEvent(this.context);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [context];
+}
+
+class Abc extends HomeScreenEvent {
+  final BuildContext context;
+
+  Abc(this.context);
+  @override
+  List<Object?> get props => [context];
 }
 
 class CalculateWithPercent extends HomeScreenEvent {

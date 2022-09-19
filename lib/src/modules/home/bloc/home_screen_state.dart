@@ -10,6 +10,14 @@ class HomeScreenInitial extends HomeScreenState {
   List<Object?> get props => [];
 }
 
+class HomeScreenStartData extends HomeScreenState {
+  final List<String> cryptos;
+
+  HomeScreenStartData(this.cryptos);
+  @override
+  List<Object?> get props => [cryptos];
+}
+
 class PercentCalculateData extends HomeScreenState {
   final PercentResult resultModel;
 

@@ -54,6 +54,9 @@ dependencies:
   intl: ^0.17.0 # Provides internationalization and l10n facilities
 
   localization: ^2.1.0
+  dropdown_search: ^5.0.2
+  easy_loading: ^0.0.4
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -82,7 +85,7 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
-
+    - assets/datas/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

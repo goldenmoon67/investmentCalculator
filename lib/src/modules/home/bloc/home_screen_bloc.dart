@@ -1,18 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/repositories/calculate_repository.dart';
+import 'package:crypto_price/src/repositories/crypto_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 part 'home_screen_event.dart';
 part 'home_screen_state.dart';
 
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final CalculateRepositroy _calculateRepositroy = getIt<CalculateRepositroy>();
+  final CryptoRepository _cryptoRepository = getIt<CryptoRepository>();
+
   HomeScreenBloc() : super(HomeScreenInitial()) {
-    on<HomeScreenEvent>((event, emit) {
-      emit(HomeScreenInitial());
-    });
+    on<HomeScreenStartEvent>((event, emit) => _getInitial(event, emit));
     on<CalculateWithPercent>(
         (event, emit) => _calculateWithPercent(event, emit));
     on<CalculateWithPrice>((event, emit) => _calculateWithPrice(event, emit));
@@ -49,5 +52,16 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   _setWhichPercent(SetWhichPercent event, Emitter<HomeScreenState> emit) {
     _calculateRepositroy.setWhichPercent(event.wannaMore);
+  }
+
+  _getInitial(HomeScreenStartEvent event, Emitter<HomeScreenState> emit) async {
+    try {
+      List<String> cryptos =
+          await _cryptoRepository.getCryptoNames(event.context);
+
+      emit(HomeScreenStartData(cryptos));
+    } catch (e) {
+      emit(ErrorMessage(e.toString()));
+    }
   }
 }

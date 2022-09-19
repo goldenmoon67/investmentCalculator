@@ -1,7 +1,7 @@
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 
-class Client {
+class CalculateApi {
   double? _sliderPercent;
   bool _wannaMore = false;
 

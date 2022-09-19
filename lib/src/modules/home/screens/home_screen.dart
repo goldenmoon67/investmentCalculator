@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
@@ -8,8 +10,10 @@ import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';
 import 'package:crypto_price/src/widgets/inputs/text_form_field.dart';
 import 'package:crypto_price/src/widgets/tabbars/views/percent_tabview.dart';
 import 'package:crypto_price/src/widgets/tabbars/views/price_tabview.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../bloc/home_screen_bloc.dart';
@@ -27,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TextEditingController _currentRangeController;
   late TextEditingController _howMuchTextController;
   late TextEditingController _expectingProfitController;
+  String investmentName = "";
+  List<String> cryptoNameList = [];
 
   late TabController _tabController;
   final formKey = GlobalKey<FormState>();
@@ -56,9 +62,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenBloc()..add(HomeScreenStartEvent()),
+      create: (context) => HomeScreenBloc()..add(HomeScreenStartEvent(context)),
       child: BlocConsumer<HomeScreenBloc, HomeScreenState>(
         listener: (context, state) {
+          if (state is HomeScreenInitial) {
+            EasyLoading.show();
+          } else {
+            EasyLoading.dismiss(animation: false);
+          }
           if (state is PercentCalculateData) {
             pushNewScreen(
               context,
@@ -75,87 +86,137 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           }
         },
         buildWhen: (previous, state) {
-          return (state is HomeScreenInitial ||
-              state is PriceCalculateData ||
+          return (state is PriceCalculateData ||
+              state is HomeScreenStartData ||
               state is PercentCalculateData);
         },
         builder: (context, state) {
-          Widget content = getInitial(context);
+          if (state is HomeScreenStartData) {
+            cryptoNameList = state.cryptos;
+          }
+          Widget content = getInitial(context, state);
           return Scaffold(
             backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: content,
+            ),
             resizeToAvoidBottomInset: false,
-            body: content,
           );
         },
       ),
     );
   }
 
-  Widget getInitial(BuildContext context) {
+  Widget getInitial(BuildContext context, state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
       child: Center(
         child: Form(
           key: formKey,
-          child: Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 80,
-              ),
-              TabbarWidget(tabController: _tabController),
-              const SizedBox(
-                height: 30,
-              ),
-              TextForm(
-                inputAction: TextInputAction.next,
-                prefixIcon: const SizedBox(),
-                controller: _textEditingController,
-                inputType: TextInputType.name,
-                label: "Investment name",
-                validator: ((value) {
-                  return nameValidator(context, value);
-                }),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: AppColors.greyColor,
-                    borderRadius: BorderRadius.circular(8)),
-                child: TextForm(
-                  inputAction: TextInputAction.next,
-                  prefixIcon: const Icon(Icons.monetization_on_sharp),
-                  controller: _currentRangeController,
-                  inputType: TextInputType.number,
-                  label: "Current Range Of Investmen",
-                  validator: ((value) {
-                    return priceValidator(context, value);
-                  }),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(
+                  height: 80,
                 ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: _tabController,
-                  children: [
-                    PercentTabView(
-                      percentController: _percentController,
+                TabbarWidget(tabController: _tabController),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text("Investment"),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: DropdownSearch<String>(
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        fillColor: AppColors.greyColor,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.greyColor,
+                            width: 0.0,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            8,
+                          ),
+                        ),
+                        labelText: "",
+                        labelStyle: const TextStyle(color: Colors.black),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.greyColor,
+                            width: 0.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                     ),
-                    PriceTabView(
-                        howMuchTextController: _howMuchTextController,
-                        expectingProfitController: _expectingProfitController)
-                  ],
+                    popupProps: PopupProps.modalBottomSheet(
+                        modalBottomSheetProps: const ModalBottomSheetProps(
+                          barrierDismissible: true,
+                          useRootNavigator: true,
+                        ),
+                        fit: FlexFit.loose,
+                        showSearchBox: true,
+                        searchFieldProps: TextFieldProps(
+                            scrollPadding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom)),
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 2)),
+                    items: cryptoNameList,
+                    onChanged: (value) {
+                      investmentName = value.toString();
+                    },
+                  ),
                 ),
-              ),
-              CalculateButton(
-                onPress: () {
-                  _tabController.index == 0
-                      ? _onPressForPercent(context)
-                      : _onPressForPrice(context);
-                },
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: AppColors.greyColor,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextForm(
+                    inputAction: TextInputAction.next,
+                    prefixIcon: const Icon(Icons.monetization_on_sharp),
+                    controller: _currentRangeController,
+                    inputType: TextInputType.number,
+                    label: "Current Range Of Investmen",
+                    validator: ((value) {
+                      return priceValidator(context, value);
+                    }),
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: _tabController,
+                    children: [
+                      PercentTabView(
+                        percentController: _percentController,
+                      ),
+                      PriceTabView(
+                          howMuchTextController: _howMuchTextController,
+                          expectingProfitController: _expectingProfitController)
+                    ],
+                  ),
+                ),
+                CalculateButton(
+                  onPress: () {
+                    _tabController.index == 0
+                        ? _onPressForPercent(context)
+                        : _onPressForPrice(context);
+                  },
+                ),
+                SizedBox(
+                  height: 200,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -166,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
     if (valid) {
-      final String name = _textEditingController.text;
+      final String name = investmentName;
       final double percent = _percentController.text == ""
           ? 0
           : double.parse(_percentController.text);

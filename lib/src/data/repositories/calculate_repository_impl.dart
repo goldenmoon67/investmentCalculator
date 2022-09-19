@@ -1,6 +1,6 @@
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
-import 'package:crypto_price/src/data/services/funcs/client.dart';
+import 'package:crypto_price/src/data/services/client/client.dart';
 import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/repositories/calculate_repository.dart';
 
