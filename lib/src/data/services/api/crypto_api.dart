@@ -25,6 +25,23 @@ class CryptoApi {
     }
   }
 
+  getAllCryptos(BuildContext context) async {
+    try {
+      String stringResponse = await DefaultAssetBundle.of(context)
+          .loadString('assets/datas/cryptos.json');
+
+      var jsonResponse = jsonDecode(stringResponse);
+
+      _cryptos = (jsonResponse as List)
+          .map((cryptoMap) => Crypto.fromMap(cryptoMap))
+          .toList();
+
+      return _cryptos;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   transferToNames(List<Crypto>? cryptos) {
     for (int i = 0; i < cryptos!.length; i++) {
       _cryptoNames.add(cryptos[i].name);

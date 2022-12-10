@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
 import 'package:crypto_price/src/utils/navigation/router.dart';
@@ -29,9 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TextEditingController _currentRangeController;
   late TextEditingController _howMuchTextController;
   late TextEditingController _expectingProfitController;
-  String investmentSymbol = "";
-  List<String> cryptoNameList = [];
-
+  Crypto? selectedCrypto;
   late TabController _tabController;
   final formKey = GlobalKey<FormState>();
 
@@ -90,9 +90,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
         builder: (context, state) {
           if (state is HomeScreenStartData) {
-            cryptoNameList = state.cryptos;
+            // cryptoNameList = state.cryptos;
+
           }
+
+          BlocProvider.of<HomeScreenBloc>(context).add(
+            HomeScreenStartEvent(
+              context,
+            ),
+          );
           Widget content = getInitial(context, state);
+
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
@@ -125,50 +133,105 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   height: 30,
                 ),
                 const Text("Investment"),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownSearch<String>(
-                    dropdownDecoratorProps: DropDownDecoratorProps(
-                      dropdownSearchDecoration: InputDecoration(
-                        fillColor: AppColors.greyColor,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.greyColor,
-                            width: 0.0,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ),
+                DropdownSearch<Crypto>(
+                  asyncItems: (String filter) => state.cryptosFuture,
+                  itemAsString: (item) {
+                    return item.name + item.symbol;
+                  },
+                  onChanged: (Crypto? data) => {selectedCrypto = data},
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                      fillColor: AppColors.greyColor,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.greyColor,
+                          width: 0.0,
                         ),
-                        labelText: "",
-                        labelStyle: const TextStyle(color: Colors.black),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.greyColor,
-                            width: 0.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(
+                          8,
                         ),
                       ),
-                    ),
-                    popupProps: PopupProps.modalBottomSheet(
-                        modalBottomSheetProps: const ModalBottomSheetProps(
-                          barrierDismissible: true,
-                          useRootNavigator: true,
+                      labelText: "",
+                      labelStyle: const TextStyle(color: Colors.black),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.greyColor,
+                          width: 0.0,
                         ),
-                        fit: FlexFit.loose,
-                        showSearchBox: true,
-                        searchFieldProps: TextFieldProps(
-                            scrollPadding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom)),
-                        constraints: BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height / 2)),
-                    items: cryptoNameList,
-                    onChanged: (value) {
-                      investmentSymbol = value.toString();
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  dropdownBuilder: (context, selectedItem) {
+                    return selectedItem != null
+                        ? ListTile(
+                            leading: AspectRatio(
+                              aspectRatio: 1,
+                              child: ClipRRect(
+                                child: CachedNetworkImage(
+                                  imageUrl: selectedItem.icon ?? "",
+                                  fit: BoxFit.cover,
+                                  errorWidget: (context, url, error) {
+                                    return const Center(
+                                      child: Icon(
+                                        Icons.dangerous,
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              selectedItem.symbol,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            subtitle: Text(
+                              selectedItem.name,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          )
+                        : const Text("Choose your investment");
+                  },
+                  popupProps: PopupProps.modalBottomSheet(
+                    itemBuilder: (context, item, isSelected) {
+                      return ListTile(
+                        title: Text(
+                          item.symbol,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        subtitle: Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      );
                     },
+                    modalBottomSheetProps: const ModalBottomSheetProps(
+                      barrierDismissible: true,
+                      useRootNavigator: true,
+                    ),
+                    fit: FlexFit.loose,
+                    showSearchBox: true,
+                    searchFieldProps: TextFieldProps(
+                      autocorrect: true,
+                      scrollPadding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height / 2,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -224,21 +287,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _onPressForPercent(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
-    debugPrint("burad");
     if (valid) {
-      debugPrint("here");
-      final String symbol = investmentSymbol;
+      final String name = selectedCrypto?.name ?? "";
       final double percent = _percentController.text == ""
           ? 0
           : double.parse(_percentController.text);
       final double currentPrice = double.parse(_currentRangeController.text);
-      debugPrint(symbol);
       BlocProvider.of<HomeScreenBloc>(context).add(
         CalculateWithPercent(
           percent,
           currentPrice,
           context,
-          symbol,
+          name,
         ),
       );
     }
@@ -248,15 +308,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
     if (valid) {
-      final String symbol = investmentSymbol;
+      final String name = selectedCrypto?.name ?? "";
+
       final double howMuch = double.parse(_howMuchTextController.text);
       final double currentPrice = double.parse(_currentRangeController.text);
       final double expect = double.parse(_expectingProfitController.text);
-      debugPrint(symbol);
 
       BlocProvider.of<HomeScreenBloc>(context).add(
         CalculateWithPrice(
-          symbol,
+          name,
           currentPrice,
           howMuch,
           expect,

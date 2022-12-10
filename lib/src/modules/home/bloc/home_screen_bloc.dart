@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/getit.dart';
@@ -58,10 +59,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   _getInitial(HomeScreenStartEvent event, Emitter<HomeScreenState> emit) async {
     try {
-      List<String> cryptos =
-          await _cryptoRepository.getCryptoNames(event.context);
-
-      emit(HomeScreenStartData(cryptos));
+      Future<List<Crypto>> cryptosFuture =
+          _cryptoRepository.getAllCryptos(event.context);
+      var cryptos = await cryptosFuture;
+      emit(HomeScreenStartData(cryptosFuture, cryptos));
     } catch (e) {
       emit(ErrorMessage(e.toString()));
     }

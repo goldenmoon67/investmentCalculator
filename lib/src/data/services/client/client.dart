@@ -35,4 +35,8 @@ class Client {
   Future<Crypto> getCryptoModel(BuildContext context, String name) async {
     return await _cryptoApi.getCryptoModelFromJson(context, name);
   }
+
+  Future<List<Crypto>> getAllCryptos(BuildContext context) async {
+    return await _cryptoApi.getAllCryptos(context);
+  }
 }

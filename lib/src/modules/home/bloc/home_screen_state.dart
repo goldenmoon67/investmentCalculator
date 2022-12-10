@@ -11,11 +11,12 @@ class HomeScreenInitial extends HomeScreenState {
 }
 
 class HomeScreenStartData extends HomeScreenState {
-  final List<String> cryptos;
+  final Future<List<Crypto>> cryptosFuture;
+  final List<Crypto> cryptos;
 
-  HomeScreenStartData(this.cryptos);
+  HomeScreenStartData(this.cryptosFuture, this.cryptos);
   @override
-  List<Object?> get props => [cryptos];
+  List<Object?> get props => [cryptos, cryptosFuture];
 }
 
 class PercentCalculateData extends HomeScreenState {

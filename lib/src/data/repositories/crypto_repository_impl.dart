@@ -19,4 +19,9 @@ class CryptoRepositoryImpl extends CryptoRepository {
   getCryptoNames(BuildContext context) async {
     return await client.getCryptoNames(context);
   }
+
+  @override
+  Future<List<Crypto>> getAllCryptos(BuildContext context) {
+    return client.getAllCryptos(context);
+  }
 }

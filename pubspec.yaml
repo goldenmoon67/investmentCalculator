@@ -60,6 +60,7 @@ dependencies:
   lottie: ^1.4.3
   gradient_button: ^0.0.4
   cached_network_image: ^3.2.3
+  dropdown_search2: ^1.0.2
 
 dev_dependencies:
   flutter_test:
