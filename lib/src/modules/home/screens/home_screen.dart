@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
@@ -31,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TextEditingController _currentRangeController;
   late TextEditingController _howMuchTextController;
   late TextEditingController _expectingProfitController;
-  String investmentName = "";
+  String investmentSymbol = "";
   List<String> cryptoNameList = [];
 
   late TabController _tabController;
@@ -76,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               screen: PercentResultScreen(
                 percentResult: state.resultModel,
               ),
-              withNavBar: true, // OPTIONAL VALUE. True by default.
+              withNavBar: true,
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           }
@@ -126,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const SizedBox(
                   height: 30,
                 ),
-                Text("Investment"),
+                const Text("Investment"),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: DropdownSearch<String>(
@@ -169,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             maxHeight: MediaQuery.of(context).size.height / 2)),
                     items: cryptoNameList,
                     onChanged: (value) {
-                      investmentName = value.toString();
+                      investmentSymbol = value.toString();
                     },
                   ),
                 ),
@@ -212,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         : _onPressForPrice(context);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 200,
                 )
               ],
@@ -226,17 +224,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _onPressForPercent(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
+    debugPrint("burad");
     if (valid) {
-      final String name = investmentName;
+      debugPrint("here");
+      final String symbol = investmentSymbol;
       final double percent = _percentController.text == ""
           ? 0
           : double.parse(_percentController.text);
       final double currentPrice = double.parse(_currentRangeController.text);
+      debugPrint(symbol);
       BlocProvider.of<HomeScreenBloc>(context).add(
         CalculateWithPercent(
-          name,
           percent,
           currentPrice,
+          context,
+          symbol,
         ),
       );
     }
@@ -246,16 +248,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
     if (valid) {
-      final String name = _textEditingController.text;
+      final String symbol = investmentSymbol;
       final double howMuch = double.parse(_howMuchTextController.text);
       final double currentPrice = double.parse(_currentRangeController.text);
       final double expect = double.parse(_expectingProfitController.text);
+      debugPrint(symbol);
+
       BlocProvider.of<HomeScreenBloc>(context).add(
         CalculateWithPrice(
-          name,
+          symbol,
           currentPrice,
           howMuch,
           expect,
+          context,
         ),
       );
     }

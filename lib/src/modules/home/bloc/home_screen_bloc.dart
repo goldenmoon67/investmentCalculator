@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/getit.dart';
@@ -24,10 +23,11 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 
   _calculateWithPercent(
-      CalculateWithPercent event, Emitter<HomeScreenState> emit) {
+      CalculateWithPercent event, Emitter<HomeScreenState> emit) async {
     try {
+      var crypto = await _cryptoRepository.getCrypto(event.context, event.name);
       var result = _calculateRepositroy.calculateWithPercent(
-          event.name, event.percent, event.currentPrice);
+          crypto, event.percent, event.currentPrice);
 
       emit(PercentCalculateData(result));
     } catch (e) {
@@ -35,10 +35,12 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     }
   }
 
-  _calculateWithPrice(CalculateWithPrice event, Emitter<HomeScreenState> emit) {
+  _calculateWithPrice(
+      CalculateWithPrice event, Emitter<HomeScreenState> emit) async {
     try {
+      var crypto = await _cryptoRepository.getCrypto(event.context, event.name);
       var result = _calculateRepositroy.calculateWithPrice(
-          event.name, event.currentPrice, event.howMuch, event.expectingProfit);
+          crypto, event.currentPrice, event.howMuch, event.expectingProfit);
 
       emit(PriceCalculateData(result));
     } catch (e) {

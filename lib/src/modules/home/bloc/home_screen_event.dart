@@ -19,29 +19,38 @@ class Abc extends HomeScreenEvent {
 }
 
 class CalculateWithPercent extends HomeScreenEvent {
+  final BuildContext context;
   final String name;
   final double percent;
   final double currentPrice;
 
   CalculateWithPercent(
-    this.name,
     this.percent,
     this.currentPrice,
+    this.context,
+    this.name,
   );
   @override
-  List<Object?> get props => [name, percent, currentPrice];
+  List<Object?> get props => [name, percent, currentPrice, context];
 }
 
 class CalculateWithPrice extends HomeScreenEvent {
+  final BuildContext context;
   final String name;
   final double currentPrice;
   final double howMuch;
   final double expectingProfit;
 
   CalculateWithPrice(
-      this.name, this.currentPrice, this.howMuch, this.expectingProfit);
+    this.name,
+    this.currentPrice,
+    this.howMuch,
+    this.expectingProfit,
+    this.context,
+  );
   @override
-  List<Object?> get props => [name, currentPrice, howMuch, expectingProfit];
+  List<Object?> get props =>
+      [name, currentPrice, howMuch, expectingProfit, context];
 }
 
 class SetSliderValue extends HomeScreenEvent {

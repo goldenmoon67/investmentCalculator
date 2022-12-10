@@ -57,6 +57,9 @@ dependencies:
   dropdown_search: ^5.0.2
   easy_loading: ^0.0.4
   flutter_easyloading: ^3.0.5
+  lottie: ^1.4.3
+  gradient_button: ^0.0.4
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

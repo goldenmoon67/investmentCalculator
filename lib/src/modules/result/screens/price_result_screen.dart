@@ -1,9 +1,16 @@
+import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
-
+import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
+import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
+import 'package:crypto_price/src/widgets/buttons/save_investment_button.dart';
+import 'package:crypto_price/src/widgets/components/result_screen_components/investment_item.dart';
+import 'package:crypto_price/src/widgets/components/result_screen_components/investment_title.dart';
+import 'package:crypto_price/src/widgets/components/result_screen_components/profit_item.dart';
+import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_item.dart';
+import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../bloc/result_screen_bloc.dart';
 
 class PriceResultScreen extends StatefulWidget {
@@ -16,8 +23,18 @@ class PriceResultScreen extends StatefulWidget {
 }
 
 class _PriceResultScreenState extends State<PriceResultScreen> {
+  late Crypto crypto;
+  late PriceResult priceResult;
+  @override
+  void initState() {
+    crypto = widget.priceResult.crypto;
+    priceResult = widget.priceResult;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    debugPrint(crypto.icon);
     Widget content = getCalculateData(context);
 
     return BlocProvider(
@@ -26,7 +43,7 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: const ResultAppBar(),
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
             body: content,
@@ -38,156 +55,59 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
 
   Widget getCalculateData(BuildContext context) {
     return Center(
-      child: Container(
-        height: 500,
-        width: 350,
-        decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-            ),
-            gradient: LinearGradient(
-              colors: [
-                Colors.blue.shade100,
-                Colors.blue.shade400,
-                Colors.blue.shade900
-              ],
-              stops: const [
-                0.0,
-                0.5,
-                0.8,
-              ],
-            )),
-        child: Container(
-          margin: const EdgeInsets.all(4),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SvgPicture.asset("assets/images/result.svg",
-                    semanticsLabel: 'Result Logo'),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      const TextSpan(text: "Investment:"),
-                      TextSpan(
-                          text: widget.priceResult.investmentName,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                ),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      const TextSpan(text: "You bought at:"),
-                      TextSpan(
-                          text: widget.priceResult.currentRange.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                ),
-                ShaderMask(
-                  blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => LinearGradient(
-                    colors: [
-                      Colors.blue.shade900,
-                      Colors.grey,
-                    ],
-                    stops: const [
-                      0.0,
-                      1.0,
-                    ],
-                  ).createShader(
-                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                  ),
-                  child: RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.black,
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                color: AppColors.greyColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const InvestmentTitle(
+                          investmentItemType: InvestmentItemType.price),
+                      InvestmentItem(
+                        investmentItemType: InvestmentItemType.price,
+                        cryptoName: crypto.name,
+                        cryptoSymbol: crypto.symbol,
+                        currentRange: priceResult.currentRange,
+                        howMuch: priceResult.howMuch,
+                        imageUrl: crypto.icon ?? "",
                       ),
-                      children: <TextSpan>[
-                        const TextSpan(text: "You have:"),
-                        TextSpan(
-                            text:
-                                "${widget.priceResult.howMuch} ${widget.priceResult.investmentName}",
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                ),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      const TextSpan(text: "Profit You Want:"),
-                      TextSpan(
-                          text: "${widget.priceResult.expectingProfit} \$",
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ProfitItem(
+                        profitType: ProfitType.price,
+                        expectingProfit: priceResult.expectingProfit,
+                      ),
                     ],
                   ),
                 ),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      const TextSpan(
-                          text: "We suggest you that You should sell it when "),
-                      TextSpan(
-                          text: widget.priceResult.investmentName,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const TextSpan(
-                          text: " = ",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
-                          text: widget.priceResult.lastPrice.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const TextSpan(
-                          text: " to win ",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(
-                          text: widget.priceResult.expectingProfit.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const TextSpan(
-                        text: "\$ more ",
-                      )
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Save This investment")),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text("Back to Main page"),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              SuggestionItem(
+                cryptoName: crypto.name,
+                lastPrice: priceResult.lastPrice,
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              SuggestionText(
+                cryptoName: crypto.name,
+                cryptoSymbol: crypto.symbol,
+                lastPrice: priceResult.lastPrice,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SaveInvestmentButton(onpress: () {}),
+              const BackToCalculateButton(),
+            ],
           ),
-        ),
+        ],
       ),
     );
   }

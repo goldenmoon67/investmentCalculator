@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 
@@ -6,7 +7,7 @@ class CalculateApi {
   bool _wannaMore = false;
 
   PercentResult calculateWithPercent(
-    String name,
+    Crypto crypto,
     double currentRange,
     double percent,
   ) {
@@ -19,13 +20,13 @@ class CalculateApi {
     double lastPrice = currentRange + profit;
 
     return PercentResult(
-        investmentName: name,
+        crypto: crypto,
         currentRange: currentRange,
         percentWeWant: lastPercent,
         lastPrice: lastPrice);
   }
 
-  PriceResult calculateWithPrice(String name, double currentRange,
+  PriceResult calculateWithPrice(Crypto crypto, double currentRange,
       double howMuch, double expectingProfit) {
     double constValue = currentRange * howMuch;
     double lastMoney = constValue + expectingProfit;
@@ -34,7 +35,7 @@ class CalculateApi {
 
     return PriceResult(
       expectingProfit: expectingProfit,
-      investmentName: name,
+      crypto: crypto,
       currentRange: currentRange,
       howMuch: howMuch,
       lastPrice: lastPrice,

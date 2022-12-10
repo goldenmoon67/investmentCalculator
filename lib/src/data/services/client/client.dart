@@ -10,14 +10,14 @@ class Client {
   final CalculateApi _calculateApi = getIt<CalculateApi>();
   final CryptoApi _cryptoApi = getIt<CryptoApi>();
   PercentResult calculateWithPercent(
-      String name, double currentRange, double percent) {
-    return _calculateApi.calculateWithPercent(name, currentRange, percent);
+      Crypto crypto, double currentRange, double percent) {
+    return _calculateApi.calculateWithPercent(crypto, currentRange, percent);
   }
 
-  PriceResult calculateWithPrice(String name, double currentRange,
+  PriceResult calculateWithPrice(Crypto crypto, double currentRange,
       double howMuch, double expectingProfit) {
     return _calculateApi.calculateWithPrice(
-        name, currentRange, howMuch, expectingProfit);
+        crypto, currentRange, howMuch, expectingProfit);
   }
 
   void setSliderPercent(double percent) {
@@ -30,5 +30,9 @@ class Client {
 
   Future<List<String>> getCryptoNames(BuildContext context) async {
     return await _cryptoApi.getAllCryptoNames(context);
+  }
+
+  Future<Crypto> getCryptoModel(BuildContext context, String name) async {
+    return await _cryptoApi.getCryptoModelFromJson(context, name);
   }
 }

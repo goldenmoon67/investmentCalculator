@@ -3,6 +3,6 @@ import 'package:flutter/widgets.dart';
 
 abstract class CryptoRepository {
   Future<List<String>> getCryptoNames(BuildContext context);
-  getCrypto(BuildContext context, String symbol);
+  getCrypto(BuildContext context, String name);
   addNewCrypto(Crypto crypto);
 }

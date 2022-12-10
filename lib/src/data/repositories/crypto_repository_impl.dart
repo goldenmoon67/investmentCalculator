@@ -11,7 +11,9 @@ class CryptoRepositoryImpl extends CryptoRepository {
   addNewCrypto(Crypto crypto) {}
 
   @override
-  getCrypto(BuildContext context, String symbol) {}
+  getCrypto(BuildContext context, String name) async {
+    return await client.getCryptoModel(context, name);
+  }
 
   @override
   getCryptoNames(BuildContext context) async {

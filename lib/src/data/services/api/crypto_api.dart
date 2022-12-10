@@ -7,6 +7,33 @@ class CryptoApi {
   final List<String> _cryptoNames = [];
   List<Crypto>? _cryptos;
   getAllCryptoNames(BuildContext context) async {
+    try {
+      String stringResponse = await DefaultAssetBundle.of(context)
+          .loadString('assets/datas/cryptos.json');
+
+      var jsonResponse = jsonDecode(stringResponse);
+
+      _cryptos = (jsonResponse as List)
+          .map((cryptoMap) => Crypto.fromMap(cryptoMap))
+          .toList();
+
+      await transferToNames(_cryptos);
+
+      return _cryptoNames;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  transferToNames(List<Crypto>? cryptos) {
+    for (int i = 0; i < cryptos!.length; i++) {
+      _cryptoNames.add(cryptos[i].name);
+    }
+  }
+
+  Future<Crypto> getCryptoModelFromJson(
+      BuildContext context, String name) async {
+    Crypto? cryptoModel;
     String stringResponse = await DefaultAssetBundle.of(context)
         .loadString('assets/datas/cryptos.json');
 
@@ -16,14 +43,11 @@ class CryptoApi {
         .map((cryptoMap) => Crypto.fromMap(cryptoMap))
         .toList();
 
-    await transferToNames(_cryptos);
-
-    return _cryptoNames;
-  }
-
-  transferToNames(List<Crypto>? cryptos) {
-    for (int i = 0; i < cryptos!.length; i++) {
-      _cryptoNames.add(cryptos[i].name);
+    for (int i = 0; i < _cryptos!.length; i++) {
+      if (_cryptos![i].name == name) {
+        cryptoModel = _cryptos![i];
+      }
     }
+    return cryptoModel ?? Crypto(symbol: "symbol", name: "name", icon: "icon");
   }
 }

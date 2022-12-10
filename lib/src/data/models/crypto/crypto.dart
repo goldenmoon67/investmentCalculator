@@ -13,7 +13,7 @@ class Crypto {
 
   final String symbol;
   final String name;
-  final String icon;
+  final String? icon;
 
   Crypto copyWith({
     required String symbol,
