@@ -23,9 +23,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return BlocProvider(
       create: (context) => FavoriteBloc(),
       child: BlocConsumer<FavoriteBloc, FavoriteScreenState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
             backgroundColor: Colors.white,
