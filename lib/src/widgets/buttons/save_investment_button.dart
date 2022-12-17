@@ -43,9 +43,7 @@ class SaveInvestmentButton extends StatelessWidget {
             disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
-          onPressed: () {
-            onpress;
-          },
+          onPressed: onpress,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,

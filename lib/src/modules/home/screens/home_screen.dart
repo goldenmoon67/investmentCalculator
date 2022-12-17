@@ -89,18 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               state is PercentCalculateData);
         },
         builder: (context, state) {
-          if (state is HomeScreenStartData) {
-            // cryptoNameList = state.cryptos;
-
-          }
-
-          BlocProvider.of<HomeScreenBloc>(context).add(
-            HomeScreenStartEvent(
-              context,
-            ),
-          );
           Widget content = getInitial(context, state);
-
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
@@ -243,7 +232,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(8)),
                   child: TextForm(
                     inputAction: TextInputAction.next,
-                    prefixIcon: const Icon(Icons.monetization_on_sharp),
+                    prefixIcon: const Icon(
+                      Icons.monetization_on_sharp,
+                    ),
                     controller: _currentRangeController,
                     inputType: TextInputType.number,
                     label: "Current Range Of Investmen",

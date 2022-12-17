@@ -6,3 +6,11 @@ class ResultScreenStartEvent extends ResultScreenEvent {
   @override
   List<Object?> get props => [];
 }
+
+class Save2FavoritesEvent extends ResultScreenEvent {
+  final Crypto crypto;
+
+  Save2FavoritesEvent(this.crypto);
+  @override
+  List<Object?> get props => [crypto];
+}

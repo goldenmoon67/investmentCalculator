@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveDataBaseApi {
-  Box<Crypto> favoriteBox = Hive.box<Crypto>("favorites");
+  final Box<Crypto> _favoriteBox = Hive.box<Crypto>("favorites");
   addItem(Crypto crypto) async {
     try {
-      if (favoriteBox.length < 5) {
-        favoriteBox.add(crypto);
-        return "Added";
+      if (_favoriteBox.length < 5) {
+        _favoriteBox.add(crypto);
+        debugPrint("Crypto was saved. Favorite Limit: ${_favoriteBox.length}");
       } else {
+        debugPrint("Limit is full");
+
         return "Limit is full";
       }
     } catch (e) {
@@ -21,9 +23,9 @@ class HiveDataBaseApi {
     try {
       if (findItemIndex(crypto) != null) {
         var itemIndex = findItemIndex(crypto);
-        favoriteBox.deleteAt(itemIndex!);
+        _favoriteBox.deleteAt(itemIndex!);
       }
-      return "Deleted";
+      debugPrint("Favorite was deleted");
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -33,7 +35,7 @@ class HiveDataBaseApi {
     int? itemIndex;
     try {
       for (int i = 0; i < 5; i++) {
-        if (crypto == favoriteBox.getAt(i)) {
+        if (crypto == _favoriteBox.getAt(i)) {
           itemIndex = i;
           break;
         }
@@ -48,8 +50,10 @@ class HiveDataBaseApi {
     List<Crypto?> favorites = [];
     try {
       for (int i = 0; i < 5; i++) {
-        favorites.add(favoriteBox.getAt(i));
+        favorites.add(_favoriteBox.getAt(i));
       }
+      debugPrint(
+          "Favorites list is ready. Favorites length: ${favorites.length}");
     } catch (e) {
       debugPrint(e.toString());
     }

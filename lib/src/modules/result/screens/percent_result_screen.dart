@@ -1,6 +1,7 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
+import 'package:crypto_price/src/modules/favorite/screen/favorite_screen.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
 import 'package:crypto_price/src/widgets/buttons/save_investment_button.dart';
@@ -11,6 +12,7 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/sug
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../../widgets/components/result_screen_components/investment_item.dart';
 import '../bloc/result_screen_bloc.dart';
@@ -36,13 +38,22 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = getCalculateData(context);
-
     return BlocProvider(
       create: (context) => ResultScreenBloc(),
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SavedItemData && state.succes) {
+            pushNewScreen(
+              context,
+              screen: const FavoriteScreen(),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+          }
+        },
         builder: (context, state) {
+          Widget content = getCalculateData(context);
+
           return Scaffold(
             appBar: const ResultAppBar(),
             backgroundColor: Colors.white,
@@ -104,7 +115,12 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
               const SizedBox(
                 height: 16,
               ),
-              SaveInvestmentButton(onpress: () {}),
+              SaveInvestmentButton(onpress: () {
+                debugPrint("bastik");
+                BlocProvider.of<ResultScreenBloc>(context).add(
+                  Save2FavoritesEvent(crypto),
+                );
+              }),
               const BackToCalculateButton(),
             ],
           ),

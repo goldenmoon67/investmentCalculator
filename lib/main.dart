@@ -7,8 +7,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox("favorites");
   Hive.registerAdapter(CryptoAdapter());
+
+  await Hive.openBox<Crypto>("favorites");
   setupGetIt();
   EasyLoading.instance;
   runApp(const MyApp());

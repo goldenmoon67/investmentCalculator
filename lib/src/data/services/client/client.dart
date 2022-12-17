@@ -3,12 +3,15 @@ import 'package:crypto_price/src/data/models/result_models/percent_result_model.
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/data/services/api/calculate_api.dart';
 import 'package:crypto_price/src/data/services/api/crypto_api.dart';
+import 'package:crypto_price/src/data/services/api/hive_database_api.dart';
 import 'package:crypto_price/src/getit.dart';
 import 'package:flutter/cupertino.dart';
 
 class Client {
   final CalculateApi _calculateApi = getIt<CalculateApi>();
   final CryptoApi _cryptoApi = getIt<CryptoApi>();
+  final HiveDataBaseApi _hiveDataBaseApi = getIt<HiveDataBaseApi>();
+
   PercentResult calculateWithPercent(
       Crypto crypto, double currentRange, double percent) {
     return _calculateApi.calculateWithPercent(crypto, currentRange, percent);
@@ -38,5 +41,17 @@ class Client {
 
   Future<List<Crypto>> getAllCryptos(BuildContext context) async {
     return await _cryptoApi.getAllCryptos(context);
+  }
+
+  Future<List<Crypto>> getFavs() async {
+    return await _hiveDataBaseApi.getAllItems();
+  }
+
+  Future<void> add2Favs(Crypto crypto) async {
+    return await _hiveDataBaseApi.addItem(crypto);
+  }
+
+  Future<List<Crypto>> removeFromFavs(Crypto crypto) async {
+    return await _hiveDataBaseApi.deleteItem(crypto);
   }
 }

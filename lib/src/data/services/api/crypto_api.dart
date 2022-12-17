@@ -18,6 +18,8 @@ class CryptoApi {
           .toList();
 
       await transferToNames(_cryptos);
+      debugPrint(
+          "CryproNames list is ready. CryptoNames length: ${_cryptos!.length}");
 
       return _cryptoNames;
     } catch (e) {
@@ -35,7 +37,7 @@ class CryptoApi {
       _cryptos = (jsonResponse as List)
           .map((cryptoMap) => Crypto.fromMap(cryptoMap))
           .toList();
-
+      debugPrint("Crypto list is ready. Cryptos length: ${_cryptos!.length}");
       return _cryptos;
     } catch (e) {
       debugPrint(e.toString());
@@ -65,6 +67,9 @@ class CryptoApi {
         cryptoModel = _cryptos![i];
       }
     }
+    debugPrint(
+      "Crypto model is ready.`{`${cryptoModel?.name ?? ""}, ${cryptoModel?.symbol ?? ""},  ${cryptoModel?.icon ?? ""} `}`",
+    );
     return cryptoModel ?? Crypto(symbol: "symbol", name: "name", icon: "icon");
   }
 }

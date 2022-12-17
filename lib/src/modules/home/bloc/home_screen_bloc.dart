@@ -63,6 +63,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
           _cryptoRepository.getAllCryptos(event.context);
       var cryptos = await cryptosFuture;
       emit(HomeScreenStartData(cryptosFuture, cryptos));
+      debugPrint("calisiyoru");
     } catch (e) {
       emit(ErrorMessage(e.toString()));
     }
