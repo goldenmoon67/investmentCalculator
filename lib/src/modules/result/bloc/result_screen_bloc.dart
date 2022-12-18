@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:crypto_price/src/data/models/crypto/crypto.dart';
+import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/repositories/database_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -22,7 +22,7 @@ class ResultScreenBloc extends Bloc<ResultScreenEvent, ResultScreenState> {
 
     try {
       debugPrint("burdayık");
-      await _databaseRepository.save2Favorite(event.crypto);
+      await _databaseRepository.save2Favorite(event.favoriteModel);
       emit(SavedItemData(true));
     } catch (e) {
       emit(ErrorMessage(e.toString()));

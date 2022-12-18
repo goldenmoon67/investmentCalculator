@@ -1,4 +1,5 @@
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
+import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/data/services/api/calculate_api.dart';
@@ -43,15 +44,16 @@ class Client {
     return await _cryptoApi.getAllCryptos(context);
   }
 
-  Future<List<Crypto>> getFavs() async {
+  Future<List<FavoriteModel>> getFavs() async {
     return await _hiveDataBaseApi.getAllItems();
   }
 
-  Future<void> add2Favs(Crypto crypto) async {
-    return await _hiveDataBaseApi.addItem(crypto);
+  Future<void> add2Favs(FavoriteModel favoriteModel) async {
+    return await _hiveDataBaseApi.addItem(favoriteModel);
   }
 
-  Future<List<Crypto>> removeFromFavs(Crypto crypto) async {
-    return await _hiveDataBaseApi.deleteItem(crypto);
+  Future<List<FavoriteModel>> removeFromFavs(
+      FavoriteModel favoriteModel) async {
+    return await _hiveDataBaseApi.deleteItem(favoriteModel);
   }
 }

@@ -127,7 +127,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   itemAsString: (item) {
                     return item.name + item.symbol;
                   },
-                  onChanged: (Crypto? data) => {selectedCrypto = data},
+                  onChanged: (Crypto? data) {
+                    selectedCrypto = data;
+                    BlocProvider.of<HomeScreenBloc>(context).add(
+                      HomeScreenStartEvent(
+                        context,
+                      ),
+                    );
+                  },
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
                       fillColor: AppColors.greyColor,
@@ -292,6 +299,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           name,
         ),
       );
+      BlocProvider.of<HomeScreenBloc>(context).add(
+        HomeScreenStartEvent(
+          context,
+        ),
+      );
     }
   }
 
@@ -311,6 +323,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           currentPrice,
           howMuch,
           expect,
+          context,
+        ),
+      );
+      BlocProvider.of<HomeScreenBloc>(context).add(
+        HomeScreenStartEvent(
           context,
         ),
       );

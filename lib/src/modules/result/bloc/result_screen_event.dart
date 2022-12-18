@@ -8,9 +8,9 @@ class ResultScreenStartEvent extends ResultScreenEvent {
 }
 
 class Save2FavoritesEvent extends ResultScreenEvent {
-  final Crypto crypto;
+  final FavoriteModel favoriteModel;
 
-  Save2FavoritesEvent(this.crypto);
+  Save2FavoritesEvent(this.favoriteModel);
   @override
-  List<Object?> get props => [crypto];
+  List<Object?> get props => [favoriteModel];
 }
