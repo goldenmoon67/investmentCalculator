@@ -7,8 +7,8 @@ class DatabaseRepositroyImpl extends DatabaseRepository {
   Client client = getIt<Client>();
 
   @override
-  Future<List<FavoriteModel>> getFavorites() async {
-    var result = await client.getFavs();
+  List<FavoriteModel?> getFavorites() {
+    var result = client.getFavs();
     return result;
   }
 

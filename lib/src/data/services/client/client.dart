@@ -44,8 +44,8 @@ class Client {
     return await _cryptoApi.getAllCryptos(context);
   }
 
-  Future<List<FavoriteModel>> getFavs() async {
-    return await _hiveDataBaseApi.getAllItems();
+  List<FavoriteModel?> getFavs() {
+    return _hiveDataBaseApi.getAllItems();
   }
 
   Future<void> add2Favs(FavoriteModel favoriteModel) async {
