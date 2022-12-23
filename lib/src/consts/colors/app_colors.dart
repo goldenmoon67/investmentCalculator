@@ -5,4 +5,5 @@ class AppColors {
   static MaterialStateProperty<Color?> blueButtonColor =
       MaterialStateProperty.all(const Color.fromRGBO(0, 122, 255, 1));
   static Color blueColor = const Color.fromRGBO(0, 122, 255, 1);
+  static Color greenColor = const Color(0xFF05B72C);
 }

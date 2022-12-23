@@ -32,7 +32,7 @@ class _TabbarWidgetState extends State<TabbarWidget> {
             Tab(
               child: Tab(
                 child: Text(
-                  "with percent",
+                  "percentage",
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -41,7 +41,7 @@ class _TabbarWidgetState extends State<TabbarWidget> {
             ),
             Tab(
               icon: Text(
-                "with price",
+                "price",
                 style: TextStyle(color: Colors.black),
               ),
             ),

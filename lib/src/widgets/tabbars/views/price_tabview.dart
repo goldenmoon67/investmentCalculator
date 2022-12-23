@@ -28,7 +28,7 @@ class PriceTabView extends StatelessWidget {
             prefixIcon: const Icon(Icons.wallet),
             controller: howMuchTextController,
             inputType: TextInputType.number,
-            label: "How Much You Got",
+            label: "How many",
             validator: ((value) {
               return priceValidator(context, value);
             }),
@@ -46,7 +46,7 @@ class PriceTabView extends StatelessWidget {
             prefixIcon: const Icon(Icons.attach_money_outlined),
             controller: expectingProfitController,
             inputType: TextInputType.number,
-            label: "Expecting Profit Range",
+            label: "Desired earnings",
             validator: ((value) {
               return priceValidator(context, value);
             }),

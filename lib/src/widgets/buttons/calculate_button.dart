@@ -7,17 +7,31 @@ class CalculateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(backgroundColor: AppColors.blueButtonColor),
-      onPressed: onPress,
-      child: SizedBox(
-        height: 50,
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Calculate"),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.greyColor,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(4, 8),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        style: ButtonStyle(backgroundColor: AppColors.blueButtonColor),
+        onPressed: onPress,
+        child: SizedBox(
+          height: 50,
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Calculate"),
+              ),
             ),
           ),
         ),

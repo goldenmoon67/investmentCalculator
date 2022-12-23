@@ -40,7 +40,7 @@ class _PercentTabViewState extends State<PercentTabView> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text("Profit Rate You Want"),
+                      child: Text("Desired profit margin"),
                     ),
                     const SliderWidget(),
                     SizedBox(
@@ -61,7 +61,7 @@ class _PercentTabViewState extends State<PercentTabView> {
                             },
                             child: const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text("You wanna more than 100% ?"),
+                              child: Text("More than 100% ?"),
                             ),
                           ),
                         ),
