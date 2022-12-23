@@ -25,9 +25,11 @@ class HiveDataBaseApi {
       if (findItemIndex(favoriteModel) != null) {
         var itemIndex = findItemIndex(favoriteModel);
         _favoriteBox.deleteAt(itemIndex!);
+        debugPrint("Favorite was deleted");
       }
-      debugPrint("Favorite was deleted");
     } catch (e) {
+      debugPrint("----ERROR------");
+
       debugPrint(e.toString());
     }
   }
