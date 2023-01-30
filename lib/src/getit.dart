@@ -8,6 +8,7 @@ import 'package:crypto_price/src/data/services/client/client.dart';
 import 'package:crypto_price/src/repositories/calculate_repository.dart';
 import 'package:crypto_price/src/repositories/crypto_repository.dart';
 import 'package:crypto_price/src/repositories/database_repository.dart';
+import 'package:crypto_price/src/utils/navigation/router.gr.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.I;
@@ -25,4 +26,6 @@ setupGetIt() {
   getIt.registerLazySingleton<CryptoRepository>(() => CryptoRepositoryImpl());
   getIt.registerLazySingleton<DatabaseRepository>(
       () => DatabaseRepositroyImpl());
+  //Router
+  getIt.registerSingleton(AppRouter());
 }

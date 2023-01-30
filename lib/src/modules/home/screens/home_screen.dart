@@ -78,10 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           }
-          if (state is PriceCalculateData) {
-            AppRouter.pushScreeen(
-                context, PriceResultScreen(priceResult: state.resultModel));
-          }
+          if (state is PriceCalculateData) {}
         },
         buildWhen: (previous, state) {
           return (state is PriceCalculateData ||
