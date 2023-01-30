@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
-import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
-import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
 import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';

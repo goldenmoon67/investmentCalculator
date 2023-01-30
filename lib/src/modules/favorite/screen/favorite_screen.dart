@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 import '../bloc/favorite_bloc.dart';
 import '../bloc/favorite_state.dart';
@@ -109,6 +110,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       ),
                       priceResult: null,
                       percentResult: null,
+                      createdTime: DateTime.now(),
                     ),
               );
             },
@@ -311,35 +313,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_filled,
-                                  color: AppColors.blueColor,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                const Text(
-                                  "Created time:",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(item.percentResult != null
-                                    ? item.percentResult!.currentRange
-                                        .toStringAsFixed(3)
-                                    : item.priceResult!.currentRange
-                                        .toStringAsFixed(3)),
-                                const Text(
-                                  " \$",
-                                ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -347,7 +320,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: MediaQuery.of(context).size.width / 10),
                 child: Row(
                   children: [
                     Icon(
@@ -385,7 +360,38 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.access_time_filled,
+                      color: AppColors.blueColor,
+                      size: 16,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    const Text(
+                      "Created time:",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      item.createdTime != null
+                          ? DateFormat('dd-MM-yyyy – kk:mm')
+                              .format(item.createdTime!)
+                          : "",
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

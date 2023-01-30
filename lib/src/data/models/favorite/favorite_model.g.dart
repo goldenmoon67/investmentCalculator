@@ -20,19 +20,22 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       crypto: fields[0] as Crypto,
       priceResult: fields[1] as PriceResult?,
       percentResult: fields[2] as PercentResult?,
+      createdTime: fields[3] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoriteModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.crypto)
       ..writeByte(1)
       ..write(obj.priceResult)
       ..writeByte(2)
-      ..write(obj.percentResult);
+      ..write(obj.percentResult)
+      ..writeByte(3)
+      ..write(obj.createdTime);
   }
 
   @override

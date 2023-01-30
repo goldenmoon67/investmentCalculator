@@ -16,6 +16,7 @@ class FavoriteModel {
     required this.crypto,
     required this.priceResult,
     required this.percentResult,
+    required this.createdTime,
   });
   @HiveField(0)
   final Crypto crypto;
@@ -26,26 +27,33 @@ class FavoriteModel {
   @HiveField(2)
   final PercentResult? percentResult;
 
+  @HiveField(3)
+  final DateTime? createdTime;
+
   FavoriteModel copyWith({
     required Crypto crypto,
     PriceResult? priceResult,
     PercentResult? percentResult,
+    required DateTime cretedTime,
   }) =>
       FavoriteModel(
         crypto: crypto,
         priceResult: priceResult,
         percentResult: percentResult,
+        createdTime: createdTime,
       );
 
   factory FavoriteModel.fromMap(Map<String, dynamic> json) => FavoriteModel(
         crypto: json["crypto"],
         priceResult: json["priceResult"],
         percentResult: json["percentResult"],
+        createdTime: json["createdTime"],
       );
 
   Map<String, dynamic> toMap() => {
         "crypto": crypto,
         "priceResult": priceResult,
         "percentResult": percentResult,
+        "createdTime": createdTime,
       };
 }

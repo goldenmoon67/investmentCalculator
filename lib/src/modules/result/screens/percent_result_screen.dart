@@ -121,6 +121,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                   crypto: crypto,
                   percentResult: widget.percentResult,
                   priceResult: null,
+                  createdTime: DateTime.now(),
                 );
                 BlocProvider.of<ResultScreenBloc>(context).add(
                   Save2FavoritesEvent(model),

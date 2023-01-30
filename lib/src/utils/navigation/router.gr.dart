@@ -13,9 +13,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart'
-    as _i10;
-import 'package:crypto_price/src/data/models/result_models/price_result_model.dart'
     as _i9;
+import 'package:crypto_price/src/data/models/result_models/price_result_model.dart'
+    as _i8;
 import 'package:crypto_price/src/modules/dashboard/screen/dashboard_screen.dart'
     as _i1;
 import 'package:crypto_price/src/modules/favorite/screen/favorite_screen.dart'
@@ -25,7 +25,6 @@ import 'package:crypto_price/src/modules/result/screens/percent_result_screen.da
     as _i3;
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart'
     as _i2;
-import 'package:flutter/cupertino.dart' as _i8;
 import 'package:flutter/material.dart' as _i7;
 
 class AppRouter extends _i6.RootStackRouter {
@@ -126,8 +125,8 @@ class DashBoardRoute extends _i6.PageRouteInfo<void> {
 /// [_i2.PriceResultScreen]
 class PriceResultRoute extends _i6.PageRouteInfo<PriceResultRouteArgs> {
   PriceResultRoute({
-    _i8.Key? key,
-    required _i9.PriceResult priceResult,
+    _i7.Key? key,
+    required _i8.PriceResult priceResult,
   }) : super(
           PriceResultRoute.name,
           path: '/priceResult',
@@ -146,9 +145,9 @@ class PriceResultRouteArgs {
     required this.priceResult,
   });
 
-  final _i8.Key? key;
+  final _i7.Key? key;
 
-  final _i9.PriceResult priceResult;
+  final _i8.PriceResult priceResult;
 
   @override
   String toString() {
@@ -160,8 +159,8 @@ class PriceResultRouteArgs {
 /// [_i3.PercentResultScreen]
 class PercentResultRoute extends _i6.PageRouteInfo<PercentResultRouteArgs> {
   PercentResultRoute({
-    _i8.Key? key,
-    required _i10.PercentResult percentResult,
+    _i7.Key? key,
+    required _i9.PercentResult percentResult,
   }) : super(
           PercentResultRoute.name,
           path: '/priceResult',
@@ -180,9 +179,9 @@ class PercentResultRouteArgs {
     required this.percentResult,
   });
 
-  final _i8.Key? key;
+  final _i7.Key? key;
 
-  final _i10.PercentResult percentResult;
+  final _i9.PercentResult percentResult;
 
   @override
   String toString() {

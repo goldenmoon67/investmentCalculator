@@ -17,25 +17,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AutoTabsRouter(
-        lazyLoad: true,
-        inheritNavigatorObservers: false,
-        homeIndex: 1,
-        routes: const [HomeRoute(), FavoriteRoute()],
-        duration: const Duration(milliseconds: 200),
-        builder: (context, child, animation) {
-          final tabsRouter = context.tabsRouter;
-          return Scaffold(
-            body: FadeTransition(
-              alwaysIncludeSemantics: true,
-              opacity: animation,
-              child: child,
-            ),
-            bottomNavigationBar: buildBottomNavigationBar(context, tabsRouter),
-          );
-        },
-      ),
+    return AutoTabsRouter(
+      lazyLoad: true,
+      inheritNavigatorObservers: false,
+      homeIndex: 1,
+      routes: const [HomeRoute(), FavoriteRoute()],
+      duration: const Duration(milliseconds: 200),
+      builder: (context, child, animation) {
+        final tabsRouter = context.tabsRouter;
+        return Scaffold(
+          body: FadeTransition(
+            alwaysIncludeSemantics: true,
+            opacity: animation,
+            child: child,
+          ),
+          bottomNavigationBar: buildBottomNavigationBar(context, tabsRouter),
+        );
+      },
     );
   }
 }
@@ -43,7 +41,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
 BottomNavigationBar buildBottomNavigationBar(
     BuildContext context, TabsRouter tabsRouter) {
   return BottomNavigationBar(
-    onTap: tabsRouter.setActiveIndex,
+    elevation: 0,
+    enableFeedback: false,
+    type: BottomNavigationBarType.fixed,
+    onTap: ((value) {
+      if (value == 0) {}
+
+      //TODO:: BLoc provider (multi) refresh for all click
+      tabsRouter.setActiveIndex(value);
+    }),
     currentIndex: tabsRouter.activeIndex,
     items: const [
       BottomNavigationBarItem(icon: Icon(Icons.calculate), label: 'Calculate'),

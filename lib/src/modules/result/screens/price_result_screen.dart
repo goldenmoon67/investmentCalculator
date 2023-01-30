@@ -1,5 +1,6 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
+import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
@@ -103,7 +104,17 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
               const SizedBox(
                 height: 16,
               ),
-              SaveInvestmentButton(onpress: () {}),
+              SaveInvestmentButton(onpress: () {
+                var model = FavoriteModel(
+                  crypto: crypto,
+                  percentResult: null,
+                  priceResult: widget.priceResult,
+                  createdTime: DateTime.now(),
+                );
+                BlocProvider.of<ResultScreenBloc>(context).add(
+                  Save2FavoritesEvent(model),
+                );
+              }),
               const BackToCalculateButton(),
             ],
           ),
