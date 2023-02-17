@@ -52,8 +52,7 @@ class Client {
     return await _hiveDataBaseApi.addItem(favoriteModel);
   }
 
-  Future<List<FavoriteModel>> removeFromFavs(
-      FavoriteModel favoriteModel) async {
+  Future<void> removeFromFavs(FavoriteModel favoriteModel) async {
     return await _hiveDataBaseApi.deleteItem(favoriteModel);
   }
 }

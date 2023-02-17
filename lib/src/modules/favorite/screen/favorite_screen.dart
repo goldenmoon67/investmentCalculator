@@ -6,7 +6,6 @@ import 'package:crypto_price/src/modules/favorite/bloc/favorite_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -21,6 +20,7 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  int? lengt;
   @override
   void initState() {
     super.initState();
@@ -47,7 +47,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         builder: (context, state) {
           Widget content = Container();
 
-          if (state is FavoriteStartData || state is FavoriteRefreshData) {
+          if (state is FavoriteStartData) {
+            content = _getContent(state);
+          } else if (state is FavoriteRefreshData) {
             content = _getContent(state);
           }
           return Scaffold(
@@ -64,6 +66,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget _getContent(state) {
+    debugPrint(state.items.length.toString());
     return Column(
       children: [
         Stack(
@@ -124,38 +127,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   _getWidget(BuildContext context, int index, FavoriteModel item) {
-    return Slidable(
+    return Dismissible(
       key: UniqueKey(),
-
-      // The start action pane is the one at the left or the top side.
-      startActionPane: ActionPane(
-        // A motion is a widget used to control how the pane animates.
-        motion: const ScrollMotion(),
-
-        // A pane can dismiss the Slidable.
-        dismissible: DismissiblePane(
-          key: Key(item.toString()), //TODO:: there is a problem on dismasable
-          onDismissed: () {
-            BlocProvider.of<FavoriteBloc>(context).add(RemoveItemEvent(item));
-          },
-          dismissThreshold: 0.2,
-          dismissalDuration: const Duration(milliseconds: 15),
-        ),
-
-        // All actions are defined in the children parameter.
-        children: [
-          // A SlidableAction can have an icon and/or a label.
-          SlidableAction(
-            key: UniqueKey(),
-            onPressed: doNothing,
-            backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Delete',
-          ),
-        ],
-      ),
-
+      onDismissed: (DismissDirection direction) {
+        BlocProvider.of<FavoriteBloc>(context).add(RemoveItemEvent(item));
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
         child: Container(
@@ -187,23 +163,24 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           child: AspectRatio(
                             aspectRatio: 1,
                             child: ClipRRect(
-                              child: CachedNetworkImage(
-                                imageUrl: item.crypto.icon ??
-                                    "assets/images/placeholder_coin.jpg",
-                                fit: BoxFit.cover,
-                                errorWidget: (context, url, error) {
-                                  return SizedBox(
-                                    height: 80,
-                                    child: Image.asset(
-                                      "assets/images/placeholder_coin.png",
-                                      fit: BoxFit.fill,
-                                      height: 120,
-                                      width: 120,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
+                                child: CachedNetworkImage(
+                              imageUrl: item.crypto.icon == " " ||
+                                      item.crypto.icon == null
+                                  ? "assets/images/placeholder_coin.jpg"
+                                  : item.crypto.icon!,
+                              fit: BoxFit.cover,
+                              errorWidget: (context, url, error) {
+                                return SizedBox(
+                                  height: 80,
+                                  child: Image.asset(
+                                    "assets/images/placeholder_coin.png",
+                                    fit: BoxFit.fill,
+                                    height: 120,
+                                    width: 120,
+                                  ),
+                                );
+                              },
+                            )),
                           ),
                         ),
                         Text(

@@ -20,7 +20,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return AutoTabsRouter(
       lazyLoad: true,
       inheritNavigatorObservers: false,
-      homeIndex: 1,
       routes: const [HomeRoute(), FavoriteRoute()],
       duration: const Duration(milliseconds: 200),
       builder: (context, child, animation) {

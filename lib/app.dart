@@ -16,11 +16,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerDelegate: _appRouter.delegate(
-        initialRoutes: [
-          const DashBoardRoute(
-            children: [HomeRoute(), FavoriteRoute()],
-          )
-        ],
+        initialRoutes: [const DashBoardRoute()],
       ),
       routeInformationProvider: _appRouter.routeInfoProvider(),
       routeInformationParser: _appRouter.defaultRouteParser(),

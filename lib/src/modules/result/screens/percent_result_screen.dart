@@ -3,7 +3,6 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
-import 'package:crypto_price/src/modules/favorite/screen/favorite_screen.dart';
 import 'package:crypto_price/src/utils/navigation/router.gr.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
@@ -15,7 +14,6 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/sug
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../../widgets/components/result_screen_components/investment_item.dart';
 import '../bloc/result_screen_bloc.dart';
@@ -46,8 +44,10 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
-            context
-                .pushRoute(const DashBoardRoute(children: [FavoriteRoute()]));
+            context.pushRoute(const DashBoardRoute(children: [
+              FavoriteRoute(),
+              // HomeRoute(),
+            ]));
           }
         },
         builder: (context, state) {

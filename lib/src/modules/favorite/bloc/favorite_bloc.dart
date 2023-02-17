@@ -3,6 +3,7 @@ import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/modules/favorite/bloc/favorite_event.dart';
 import 'package:crypto_price/src/modules/favorite/bloc/favorite_state.dart';
 import 'package:crypto_price/src/repositories/database_repository.dart';
+import 'package:flutter/cupertino.dart';
 
 class FavoriteBloc extends Bloc<FavoriteScreenEvent, FavoriteScreenState> {
   final DatabaseRepository _databaseRepository = getIt<DatabaseRepository>();
@@ -25,9 +26,10 @@ class FavoriteBloc extends Bloc<FavoriteScreenEvent, FavoriteScreenState> {
     try {
       await _databaseRepository.removeFromFavs(event.model);
       var list = _databaseRepository.getFavorites();
+      debugPrint("${list.length}----");
       emit(FavoriteRefreshData(list));
     } catch (e) {
-      emit(ErrorMessage(e.toString()));
+      emit(ErrorMessage(e.toString() + "from bloc"));
     }
   }
 }

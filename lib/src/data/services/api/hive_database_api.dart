@@ -25,7 +25,9 @@ class HiveDataBaseApi {
       if (findItemIndex(favoriteModel) != null) {
         var itemIndex = findItemIndex(favoriteModel);
         _favoriteBox.deleteAt(itemIndex!);
-        debugPrint("Favorite was deleted");
+
+        debugPrint(
+            "Favorite was deleted. Favorite Length: ${_favoriteBox.length}");
       }
     } catch (e) {
       debugPrint("----ERROR------");
@@ -52,11 +54,13 @@ class HiveDataBaseApi {
   getAllItems() {
     List<FavoriteModel?> favorites = [];
     try {
-      for (int i = 0; i < 5; i++) {
-        favorites.add(_favoriteBox.getAt(i));
+      if (_favoriteBox.isNotEmpty) {
+        for (int i = 0; i < _favoriteBox.length; i++) {
+          favorites.add(_favoriteBox.getAt(i));
+        }
       }
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint(e.toString() + "from hive api");
     }
     debugPrint(
         "Favorites list is ready. Favorites length: ${favorites.length}");
