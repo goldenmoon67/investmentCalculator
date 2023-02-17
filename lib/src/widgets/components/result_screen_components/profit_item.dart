@@ -49,7 +49,7 @@ class ProfitItem extends StatelessWidget {
               width: 4,
             ),
             GradientText(
-              "$prefix $expectingProfit",
+              "$prefix ${expectingProfit.toStringAsFixed(3)}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

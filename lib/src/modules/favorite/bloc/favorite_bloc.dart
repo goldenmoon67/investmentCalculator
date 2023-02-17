@@ -25,7 +25,7 @@ class FavoriteBloc extends Bloc<FavoriteScreenEvent, FavoriteScreenState> {
     try {
       await _databaseRepository.removeFromFavs(event.model);
       var list = _databaseRepository.getFavorites();
-      emit(FavoriteStartData(list));
+      emit(FavoriteRefreshData(list));
     } catch (e) {
       emit(ErrorMessage(e.toString()));
     }

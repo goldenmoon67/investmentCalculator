@@ -19,6 +19,14 @@ class FavoriteStartData extends FavoriteScreenState {
   List<Object?> get props => [items];
 }
 
+class FavoriteRefreshData extends FavoriteScreenState {
+  final List<FavoriteModel?> items;
+
+  FavoriteRefreshData(this.items);
+  @override
+  List<Object?> get props => [items];
+}
+
 class ErrorMessage extends FavoriteScreenState {
   final String message;
 

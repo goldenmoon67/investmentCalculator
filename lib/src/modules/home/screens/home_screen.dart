@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
+import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
 import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';
@@ -76,7 +77,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           }
-          if (state is PriceCalculateData) {}
+          if (state is PriceCalculateData) {
+            pushNewScreen(
+              context,
+              screen: PriceResultScreen(
+                priceResult: state.resultModel,
+              ),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+          }
         },
         buildWhen: (previous, state) {
           return (state is PriceCalculateData ||

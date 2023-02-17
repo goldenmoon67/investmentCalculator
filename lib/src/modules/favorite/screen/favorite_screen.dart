@@ -40,12 +40,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         },
         buildWhen: (previous, state) {
           debugPrint(state.toString());
-          return (state is FavoriteInitialState || state is FavoriteStartData);
+          return (state is FavoriteInitialState ||
+              state is FavoriteStartData ||
+              state is FavoriteRefreshData);
         },
         builder: (context, state) {
           Widget content = Container();
 
-          if (state is FavoriteStartData) {
+          if (state is FavoriteStartData || state is FavoriteRefreshData) {
             content = _getContent(state);
           }
           return Scaffold(
@@ -61,7 +63,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
   }
 
-  Widget _getContent(FavoriteStartData state) {
+  Widget _getContent(state) {
     return Column(
       children: [
         Stack(
@@ -132,6 +134,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
         // A pane can dismiss the Slidable.
         dismissible: DismissiblePane(
+          key: Key(item.toString()), //TODO:: there is a problem on dismasable
           onDismissed: () {
             BlocProvider.of<FavoriteBloc>(context).add(RemoveItemEvent(item));
           },
@@ -143,6 +146,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
+            key: UniqueKey(),
             onPressed: doNothing,
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,

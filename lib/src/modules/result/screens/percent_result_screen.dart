@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
 import 'package:crypto_price/src/modules/favorite/screen/favorite_screen.dart';
+import 'package:crypto_price/src/utils/navigation/router.gr.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
 import 'package:crypto_price/src/widgets/buttons/save_investment_button.dart';
@@ -44,12 +46,8 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
-            pushNewScreen(
-              context,
-              screen: const FavoriteScreen(),
-              withNavBar: true,
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
+            context
+                .pushRoute(const DashBoardRoute(children: [FavoriteRoute()]));
           }
         },
         builder: (context, state) {
@@ -90,9 +88,9 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                         imageUrl: crypto.icon ?? "",
                         howMuch: 10,
                       ),
-                      const ProfitItem(
+                      ProfitItem(
                         profitType: ProfitType.percent,
-                        expectingProfit: 10,
+                        expectingProfit: percentResult.percentWeWant,
                       ),
                     ],
                   ),

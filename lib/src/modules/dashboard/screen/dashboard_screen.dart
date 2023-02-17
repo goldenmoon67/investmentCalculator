@@ -44,12 +44,7 @@ BottomNavigationBar buildBottomNavigationBar(
     elevation: 0,
     enableFeedback: false,
     type: BottomNavigationBarType.fixed,
-    onTap: ((value) {
-      if (value == 0) {}
-
-      //TODO:: BLoc provider (multi) refresh for all click
-      tabsRouter.setActiveIndex(value);
-    }),
+    onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,
     items: const [
       BottomNavigationBarItem(icon: Icon(Icons.calculate), label: 'Calculate'),

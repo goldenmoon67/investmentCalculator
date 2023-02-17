@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
+import 'package:crypto_price/src/utils/navigation/router.gr.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
 import 'package:crypto_price/src/widgets/buttons/save_investment_button.dart';
@@ -36,13 +38,19 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
   @override
   Widget build(BuildContext context) {
     debugPrint(crypto.icon);
-    Widget content = getCalculateData(context);
 
     return BlocProvider(
       create: (context) => ResultScreenBloc(),
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SavedItemData && state.succes) {
+            context
+                .pushRoute(const DashBoardRoute(children: [FavoriteRoute()]));
+          }
+        },
         builder: (context, state) {
+          Widget content = getCalculateData(context);
+
           return Scaffold(
             appBar: const ResultAppBar(),
             backgroundColor: Colors.white,

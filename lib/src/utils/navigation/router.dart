@@ -10,7 +10,6 @@ import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart
       path: '/dashboard',
       name: 'DashBoardRoute',
       page: DashboardScreen,
-      initial: true,
       children: [
         AutoRoute(
           path: 'home',
