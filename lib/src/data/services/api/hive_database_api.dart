@@ -60,7 +60,7 @@ class HiveDataBaseApi {
         }
       }
     } catch (e) {
-      debugPrint(e.toString() + "from hive api");
+      debugPrint("${e}from hive api");
     }
     debugPrint(
         "Favorites list is ready. Favorites length: ${favorites.length}");

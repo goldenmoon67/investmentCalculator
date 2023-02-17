@@ -29,7 +29,7 @@ class FavoriteBloc extends Bloc<FavoriteScreenEvent, FavoriteScreenState> {
       debugPrint("${list.length}----");
       emit(FavoriteRefreshData(list));
     } catch (e) {
-      emit(ErrorMessage(e.toString() + "from bloc"));
+      emit(ErrorMessage("${e}from bloc"));
     }
   }
 }
