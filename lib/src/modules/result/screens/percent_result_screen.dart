@@ -3,6 +3,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
+import 'package:crypto_price/src/utils/dialogs/dialog_utils.dart';
 import 'package:crypto_price/src/utils/navigation/router.gr.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
@@ -11,7 +12,6 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/inv
 import 'package:crypto_price/src/widgets/components/result_screen_components/profit_item.dart';
 import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_item.dart';
 import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_text.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,8 +46,9 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
           if (state is SavedItemData && state.succes) {
             context.pushRoute(const DashBoardRoute(children: [
               FavoriteRoute(),
-              // HomeRoute(),
             ]));
+          } else if (state is ResultScreenErrorState) {
+            DialogUtils.showLimitFullDialog(context);
           }
         },
         builder: (context, state) {

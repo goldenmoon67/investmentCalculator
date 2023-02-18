@@ -24,3 +24,11 @@ class ErrorMessage extends ResultScreenState {
   @override
   List<Object?> get props => [message];
 }
+
+class ResultScreenErrorState extends ResultScreenState {
+  final String message;
+
+  ResultScreenErrorState(this.message);
+  @override
+  List<Object?> get props => [message];
+}

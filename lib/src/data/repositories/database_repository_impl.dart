@@ -18,7 +18,7 @@ class DatabaseRepositroyImpl extends DatabaseRepository {
   }
 
   @override
-  Future<void> save2Favorite(FavoriteModel favoriteModel) async {
-    await client.add2Favs(favoriteModel);
+  Future<String?> save2Favorite(FavoriteModel favoriteModel) async {
+    return await client.add2Favs(favoriteModel);
   }
 }

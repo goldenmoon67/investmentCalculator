@@ -3,7 +3,6 @@ import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/repositories/database_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 part 'result_screen_event.dart';
 part 'result_screen_state.dart';
 
@@ -18,12 +17,14 @@ class ResultScreenBloc extends Bloc<ResultScreenEvent, ResultScreenState> {
   }
 
   _save2Favs(Save2FavoritesEvent event, Emitter<ResultScreenState> emit) async {
-    debugPrint("burdayık");
-
     try {
-      debugPrint("burdayık");
-      await _databaseRepository.save2Favorite(event.favoriteModel);
-      emit(SavedItemData(true));
+      String? result =
+          await _databaseRepository.save2Favorite(event.favoriteModel);
+      if (result == null) {
+        emit(SavedItemData(true));
+      } else {
+        emit(ResultScreenErrorState(result));
+      }
     } catch (e) {
       emit(ErrorMessage(e.toString()));
     }

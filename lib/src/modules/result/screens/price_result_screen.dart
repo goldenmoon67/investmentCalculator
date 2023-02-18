@@ -14,6 +14,7 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/sug
 import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../utils/dialogs/dialog_utils.dart';
 import '../bloc/result_screen_bloc.dart';
 
 class PriceResultScreen extends StatefulWidget {
@@ -46,6 +47,9 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
           if (state is SavedItemData && state.succes) {
             context
                 .pushRoute(const DashBoardRoute(children: [FavoriteRoute()]));
+          } else if (state is ResultScreenErrorState) {
+            DialogUtils.showSnackbar(
+                context, "hata", state.message, SnackBarType.error);
           }
         },
         builder: (context, state) {

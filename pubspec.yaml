@@ -69,6 +69,8 @@ dependencies:
   flutter_slidable: ^2.0.0
   auto_route: ^5.0.4
   auto_route_generator: ^5.0.3
+  awesome_snackbar_content: ^0.1.0
+  cool_alert: ^1.1.0
 
 dev_dependencies:
   flutter_test:

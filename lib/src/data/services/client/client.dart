@@ -48,7 +48,7 @@ class Client {
     return _hiveDataBaseApi.getAllItems();
   }
 
-  Future<void> add2Favs(FavoriteModel favoriteModel) async {
+  Future<String?> add2Favs(FavoriteModel favoriteModel) async {
     return await _hiveDataBaseApi.addItem(favoriteModel);
   }
 

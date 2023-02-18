@@ -3,6 +3,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/modules/favorite/bloc/favorite_event.dart';
+import 'package:crypto_price/src/utils/dialogs/dialog_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -96,32 +97,50 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             )
           ],
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 2 / 3,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(bottom: 80),
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              var item = state.items[index];
-              return _getWidget(
-                context,
-                index,
-                item ??
-                    FavoriteModel(
-                      crypto: Crypto(
-                        icon: "",
-                        name: "",
-                        symbol: "",
+        if (state.items.length != 0)
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 2 / 3,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(bottom: 80),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                var item = state.items[index];
+                return _getWidget(
+                  context,
+                  index,
+                  item ??
+                      FavoriteModel(
+                        crypto: Crypto(
+                          icon: "",
+                          name: "",
+                          symbol: "",
+                        ),
+                        priceResult: null,
+                        percentResult: null,
+                        createdTime: DateTime.now(),
                       ),
-                      priceResult: null,
-                      percentResult: null,
-                      createdTime: DateTime.now(),
+                );
+              },
+              itemCount: state.items.length,
+            ),
+          )
+        else
+          Column(
+            children: [
+              const Text(
+                "There is nothing in there", //TODO:: design
+              ),
+              CircleAvatar(
+                radius: 130,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      150,
                     ),
-              );
-            },
-            itemCount: state.items.length,
+                    clipBehavior: Clip.hardEdge,
+                    child: Image.asset("assets/images/nothing.jpg")),
+              )
+            ],
           ),
-        ),
       ],
     );
   }
@@ -131,6 +150,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       key: UniqueKey(),
       onDismissed: (DismissDirection direction) {
         BlocProvider.of<FavoriteBloc>(context).add(RemoveItemEvent(item));
+        DialogUtils.showSnackbar(context, "hata",
+            "Record was deleted succesfully", SnackBarType.succes);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
