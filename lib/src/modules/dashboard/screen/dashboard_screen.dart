@@ -49,9 +49,9 @@ BottomNavigationBar buildBottomNavigationBar(
       BottomNavigationBarItem(icon: Icon(Icons.calculate), label: 'Calculate'),
       BottomNavigationBarItem(
           icon: Icon(
-            Icons.fiber_smart_record,
+            Icons.wallet,
           ),
-          label: 'Record'),
+          label: 'Wallet'),
     ],
   );
 }

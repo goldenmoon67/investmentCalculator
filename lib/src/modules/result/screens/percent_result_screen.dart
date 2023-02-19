@@ -45,7 +45,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
             context.pushRoute(const DashBoardRoute(children: [
-              FavoriteRoute(),
+              FavoriteRoute(), //TODO:: setRoot
             ]));
           } else if (state is ResultScreenErrorState) {
             DialogUtils.showLimitFullDialog(context);
@@ -98,7 +98,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 0,
               ),
               SuggestionItem(
                 cryptoName: crypto.name,

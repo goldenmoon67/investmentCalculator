@@ -15,101 +15,112 @@ class SuggestionItem extends StatelessWidget {
           "assets/images/result.jpg",
         ),
         Align(
-          alignment: Alignment.topRight,
+          alignment: Alignment.bottomCenter,
           child: Stack(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width * 2 / 3,
-                margin: const EdgeInsets.only(top: 25, right: 12),
+                margin: const EdgeInsets.only(top: 200),
                 child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.shade200,
-                        Colors.blueAccent,
-                        Colors.blue.shade800,
-                      ],
-                      stops: const [
-                        0.0,
-                        0.45,
-                        1.0,
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blueAccent.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(
-                        15,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 18,
-                      ),
-                      child: Row(
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              GradientText(
-                                "$cryptoName = ",
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade200,
-                                    Colors.blueAccent,
-                                    Colors.blue.shade900,
-                                  ],
-                                  stops: const [
-                                    0.0,
-                                    0.2,
-                                    1.0,
-                                  ],
-                                ),
-                              ),
-                              GradientText(
-                                "\$ ${lastPrice.toStringAsFixed(3)}",
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blue.shade200,
-                                    Colors.blueAccent,
-                                    Colors.blue.shade900,
-                                  ],
-                                  stops: const [
-                                    0.0,
-                                    0.2,
-                                    1.0,
-                                  ],
-                                ),
-                              ),
-                            ],
+                  margin: const EdgeInsets.only(top: 30),
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue.shade200,
+                                Colors.blueAccent,
+                                Colors.blue.shade800,
+                              ],
+                              stops: const [
+                                0.0,
+                                0.45,
+                                1.0,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        ],
+                          child: Container(
+                            margin: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blueAccent.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(
+                                15,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 18,
+                              ),
+                              child: Row(
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      GradientText(
+                                        "$cryptoName = ",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.blue.shade200,
+                                            Colors.blueAccent,
+                                            Colors.blue.shade900,
+                                          ],
+                                          stops: const [
+                                            0.0,
+                                            0.2,
+                                            1.0,
+                                          ],
+                                        ),
+                                      ),
+                                      GradientText(
+                                        "\$ ${lastPrice.toStringAsFixed(3)}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.blue.shade200,
+                                            Colors.blueAccent,
+                                            Colors.blue.shade900,
+                                          ],
+                                          stops: const [
+                                            0.0,
+                                            0.2,
+                                            1.0,
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
               Container(
+                margin: const EdgeInsets.only(top: 230),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),

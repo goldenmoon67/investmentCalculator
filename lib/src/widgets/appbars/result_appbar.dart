@@ -19,12 +19,21 @@ class _ResultAppBarState extends State<ResultAppBar> {
     return PreferredSize(
       preferredSize: const Size(double.infinity, 32),
       child: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: AppColors.blueColor,
+        ),
         backgroundColor: AppColors.greyColor,
         elevation: 0,
-        title: const Text(
+        title: Text(
           "Your Investment",
           style: TextStyle(
-            color: Colors.blueAccent,
+            color: AppColors.blueColor,
             fontSize: 32,
           ),
         ),
