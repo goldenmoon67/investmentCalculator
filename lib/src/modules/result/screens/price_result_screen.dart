@@ -3,7 +3,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
-import 'package:crypto_price/src/utils/navigation/router.gr.dart';
+import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
 import 'package:crypto_price/src/widgets/buttons/save_investment_button.dart';
@@ -45,8 +45,8 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
-            context
-                .pushRoute(const DashBoardRoute(children: [FavoriteRoute()]));
+            context.router
+                .setRoot(const DashBoardRoute(children: [FavoriteRoute()]));
           } else if (state is ResultScreenErrorState) {
             DialogUtils.showSnackbar(
                 context, "hata", state.message, SnackBarType.error);

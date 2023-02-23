@@ -10,40 +10,24 @@
 //
 // ignore_for_file: type=lint
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart'
-    as _i9;
-import 'package:crypto_price/src/data/models/result_models/price_result_model.dart'
-    as _i8;
-import 'package:crypto_price/src/modules/dashboard/screen/dashboard_screen.dart'
-    as _i1;
-import 'package:crypto_price/src/modules/favorite/screen/favorite_screen.dart'
-    as _i5;
-import 'package:crypto_price/src/modules/home/screens/home_screen.dart' as _i4;
-import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart'
-    as _i3;
-import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart'
-    as _i2;
-import 'package:flutter/material.dart' as _i7;
+part of 'router.dart';
 
-class AppRouter extends _i6.RootStackRouter {
-  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+class _$AppRouter extends RootStackRouter {
+  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
-  final Map<String, _i6.PageFactory> pagesMap = {
+  final Map<String, PageFactory> pagesMap = {
     DashBoardRoute.name: (routeData) {
-      return _i6.AdaptivePage<dynamic>(
+      return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i1.DashboardScreen(),
+        child: const DashboardScreen(),
       );
     },
     PriceResultRoute.name: (routeData) {
       final args = routeData.argsAs<PriceResultRouteArgs>();
-      return _i6.AdaptivePage<dynamic>(
+      return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i2.PriceResultScreen(
+        child: PriceResultScreen(
           key: args.key,
           priceResult: args.priceResult,
         ),
@@ -51,57 +35,64 @@ class AppRouter extends _i6.RootStackRouter {
     },
     PercentResultRoute.name: (routeData) {
       final args = routeData.argsAs<PercentResultRouteArgs>();
-      return _i6.AdaptivePage<dynamic>(
+      return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i3.PercentResultScreen(
+        child: PercentResultScreen(
           key: args.key,
           percentResult: args.percentResult,
         ),
       );
     },
     HomeRoute.name: (routeData) {
-      return _i6.AdaptivePage<dynamic>(
+      return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.HomeScreen(),
+        child: const HomeScreen(),
       );
     },
     FavoriteRoute.name: (routeData) {
-      return _i6.AdaptivePage<dynamic>(
+      return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.FavoriteScreen(),
+        child: const FavoriteScreen(),
       );
     },
   };
 
   @override
-  List<_i6.RouteConfig> get routes => [
-        _i6.RouteConfig(
+  List<RouteConfig> get routes => [
+        RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: '/dashboard',
           fullMatch: true,
         ),
-        _i6.RouteConfig(
+        RouteConfig(
           DashBoardRoute.name,
           path: '/dashboard',
           children: [
-            _i6.RouteConfig(
+            RouteConfig(
+              '#redirect',
+              path: '',
+              parent: DashBoardRoute.name,
+              redirectTo: 'home',
+              fullMatch: true,
+            ),
+            RouteConfig(
               HomeRoute.name,
               path: 'home',
               parent: DashBoardRoute.name,
             ),
-            _i6.RouteConfig(
+            RouteConfig(
               FavoriteRoute.name,
               path: 'fav',
               parent: DashBoardRoute.name,
             ),
           ],
         ),
-        _i6.RouteConfig(
+        RouteConfig(
           PriceResultRoute.name,
           path: '/priceResult',
         ),
-        _i6.RouteConfig(
+        RouteConfig(
           PercentResultRoute.name,
           path: '/priceResult',
         ),
@@ -109,9 +100,9 @@ class AppRouter extends _i6.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.DashboardScreen]
-class DashBoardRoute extends _i6.PageRouteInfo<void> {
-  const DashBoardRoute({List<_i6.PageRouteInfo>? children})
+/// [DashboardScreen]
+class DashBoardRoute extends PageRouteInfo<void> {
+  const DashBoardRoute({List<PageRouteInfo>? children})
       : super(
           DashBoardRoute.name,
           path: '/dashboard',
@@ -122,11 +113,11 @@ class DashBoardRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.PriceResultScreen]
-class PriceResultRoute extends _i6.PageRouteInfo<PriceResultRouteArgs> {
+/// [PriceResultScreen]
+class PriceResultRoute extends PageRouteInfo<PriceResultRouteArgs> {
   PriceResultRoute({
-    _i7.Key? key,
-    required _i8.PriceResult priceResult,
+    Key? key,
+    required PriceResult priceResult,
   }) : super(
           PriceResultRoute.name,
           path: '/priceResult',
@@ -145,9 +136,9 @@ class PriceResultRouteArgs {
     required this.priceResult,
   });
 
-  final _i7.Key? key;
+  final Key? key;
 
-  final _i8.PriceResult priceResult;
+  final PriceResult priceResult;
 
   @override
   String toString() {
@@ -156,11 +147,11 @@ class PriceResultRouteArgs {
 }
 
 /// generated route for
-/// [_i3.PercentResultScreen]
-class PercentResultRoute extends _i6.PageRouteInfo<PercentResultRouteArgs> {
+/// [PercentResultScreen]
+class PercentResultRoute extends PageRouteInfo<PercentResultRouteArgs> {
   PercentResultRoute({
-    _i7.Key? key,
-    required _i9.PercentResult percentResult,
+    Key? key,
+    required PercentResult percentResult,
   }) : super(
           PercentResultRoute.name,
           path: '/priceResult',
@@ -179,9 +170,9 @@ class PercentResultRouteArgs {
     required this.percentResult,
   });
 
-  final _i7.Key? key;
+  final Key? key;
 
-  final _i9.PercentResult percentResult;
+  final PercentResult percentResult;
 
   @override
   String toString() {
@@ -190,8 +181,8 @@ class PercentResultRouteArgs {
 }
 
 /// generated route for
-/// [_i4.HomeScreen]
-class HomeRoute extends _i6.PageRouteInfo<void> {
+/// [HomeScreen]
+class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
@@ -202,8 +193,8 @@ class HomeRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.FavoriteScreen]
-class FavoriteRoute extends _i6.PageRouteInfo<void> {
+/// [FavoriteScreen]
+class FavoriteRoute extends PageRouteInfo<void> {
   const FavoriteRoute()
       : super(
           FavoriteRoute.name,

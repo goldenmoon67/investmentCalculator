@@ -1,5 +1,5 @@
 import 'package:crypto_price/src/getit.dart';
-import 'package:crypto_price/src/utils/navigation/router.gr.dart';
+import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget {
