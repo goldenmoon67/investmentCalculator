@@ -1,4 +1,5 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class CalculateButton extends StatelessWidget {
@@ -28,9 +29,9 @@ class CalculateButton extends StatelessWidget {
           child: Center(
             child: Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("Calculate"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(context.l10n.calculateButtonTitle),
               ),
             ),
           ),

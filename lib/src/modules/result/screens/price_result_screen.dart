@@ -49,7 +49,7 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
                 .setRoot(const DashBoardRoute(children: [FavoriteRoute()]));
           } else if (state is ResultScreenErrorState) {
             DialogUtils.showSnackbar(
-                context, "hata", state.message, SnackBarType.error);
+                context, "Error", state.message, SnackBarType.error);
           }
         },
         builder: (context, state) {

@@ -1,4 +1,5 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class TabbarWidget extends StatefulWidget {
@@ -28,12 +29,12 @@ class _TabbarWidgetState extends State<TabbarWidget> {
             borderRadius: BorderRadius.circular(8),
           ),
           controller: widget.tabController,
-          tabs: const [
+          tabs: [
             Tab(
               child: Tab(
                 child: Text(
-                  "percentage",
-                  style: TextStyle(
+                  context.l10n.tabbarTitle1,
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
@@ -41,8 +42,8 @@ class _TabbarWidgetState extends State<TabbarWidget> {
             ),
             Tab(
               icon: Text(
-                "price",
-                style: TextStyle(color: Colors.black),
+                context.l10n.tabbarTitle2,
+                style: const TextStyle(color: Colors.black),
               ),
             ),
           ],

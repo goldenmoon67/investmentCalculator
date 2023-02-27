@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text("Investment"),
+                Text(context.l10n.investment),
                 DropdownSearch<Crypto>(
                   asyncItems: (String filter) => state.cryptosFuture,
                   itemAsString: (item) {
@@ -198,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ),
                             ),
                           )
-                        : const Text("Choose your investment");
+                        : Text(context.l10n.dropdownMenuPlaceHolderText);
                   },
                   popupProps: PopupProps.modalBottomSheet(
                     itemBuilder: (context, item, isSelected) {
@@ -249,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                     controller: _currentRangeController,
                     inputType: TextInputType.number,
-                    label: "Current Range Of Investmen",
+                    label: context.l10n.currentRangeTitleText,
                     validator: ((value) {
                       return priceValidator(context, value);
                     }),

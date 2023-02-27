@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class BackToCalculateButton extends StatelessWidget {
@@ -9,9 +10,9 @@ class BackToCalculateButton extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      child: const Text(
-        "Back To Calculate",
-        style: TextStyle(
+      child: Text(
+        context.l10n.backToCalculateButtonTitle,
+        style: const TextStyle(
             color: Colors.blueAccent,
             fontSize: 12,
             fontWeight: FontWeight.w700),

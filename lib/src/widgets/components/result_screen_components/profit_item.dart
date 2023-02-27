@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/widgets/text/gradient_text.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class ProfitItem extends StatelessWidget {
         child: Row(
           children: [
             GradientText(
-              "Profit You Want: ",
+              context.l10n.profitItemTitle,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

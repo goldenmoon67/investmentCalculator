@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/widgets/text/gradient_text.dart';
 import 'package:flutter/material.dart';
 
@@ -128,7 +129,7 @@ class SuggestionItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GradientText(
-                    "Price To Sell",
+                    context.l10n.suggestionItemPriceToSell,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

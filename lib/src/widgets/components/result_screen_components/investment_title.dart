@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/widgets/components/result_screen_components/investment_item.dart';
 import 'package:flutter/material.dart';
 
@@ -12,20 +13,14 @@ class InvestmentTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Investment",
-          ),
+          Text(context.l10n.investmentItemColumnTitle1),
           const SizedBox(
             width: 58,
           ),
           investmentItemType == InvestmentItemType.price
-              ? const Text(
-                  "Total",
-                )
+              ? Text(context.l10n.investmentItemColumnTitle2)
               : const SizedBox(),
-          const Text(
-            "Current Price",
-          ),
+          Text(context.l10n.investmentItemColumnTitle3),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class NotFoundCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class NotFoundCard extends StatelessWidget {
           height: 20,
         ),
         Text(
-          "There is nothing in there",
+          context.l10n.notFoundMessage,
           style: TextStyle(
             color: AppColors.blueColor,
             fontWeight: FontWeight.bold,

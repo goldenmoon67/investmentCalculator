@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class SaveInvestmentButton extends StatelessWidget {
@@ -47,22 +48,22 @@ class SaveInvestmentButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              SizedBox(),
-              Icon(
+            children: [
+              const SizedBox(),
+              const Icon(
                 Icons.favorite_border,
                 size: 36,
                 color: Colors.white,
               ),
               Text(
-                "Save This Investment",
-                style: TextStyle(
+                context.l10n.saveInvestmentButtonTitle,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(),
+              const SizedBox(),
             ],
           ),
         ),

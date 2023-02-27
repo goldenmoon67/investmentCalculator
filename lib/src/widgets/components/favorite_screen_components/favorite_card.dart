@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -107,9 +108,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               const SizedBox(
                                 width: 4,
                               ),
-                              const Text(
-                                "Desired earnings:",
-                                style: TextStyle(
+                              Text(
+                                context.l10n.desiredEarnings,
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -148,9 +149,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               const SizedBox(
                                 width: 4,
                               ),
-                              const Text(
-                                "Purchase price:",
-                                style: TextStyle(
+                              Text(
+                                context.l10n.purchasePrice,
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -194,9 +195,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
                     Icons.arrow_forward_ios_outlined,
                     color: AppColors.blueColor,
                   ),
-                  const Text(
-                    "Selling price:",
-                    style: TextStyle(
+                  Text(
+                    context.l10n.sellingPrice,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
@@ -239,9 +240,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
                   const SizedBox(
                     width: 4,
                   ),
-                  const Text(
-                    "Created time:",
-                    style: TextStyle(
+                  Text(
+                    context.l10n.createdTime,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),

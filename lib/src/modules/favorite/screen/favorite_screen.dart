@@ -8,6 +8,7 @@ import 'package:crypto_price/src/widgets/components/favorite_screen_components/f
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 
 import '../bloc/favorite_bloc.dart';
 import '../bloc/favorite_state.dart';
@@ -64,14 +65,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Wallet",
-                    style: TextStyle(fontSize: 32),
+                  Text(
+                    context.l10n.favoriteTabTitle,
+                    style: const TextStyle(fontSize: 32),
                   ),
                   recordCount != 0
                       ? Row(
                           children: [
-                            const Text("Record: "),
+                            Text(
+                              context.l10n.recordCountTitle,
+                            ),
                             Text(recordCount.toString())
                           ],
                         )
@@ -137,8 +140,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         BlocProvider.of<FavoriteBloc>(context).add(RemoveItemEvent(item));
         DialogUtils.showSnackbar(
           context,
-          "Succes",
-          "Record was deleted",
+          context.l10n.succesSnackbarTitle,
+          context.l10n.recordDeletedMessage,
           SnackBarType.succes,
         );
       },

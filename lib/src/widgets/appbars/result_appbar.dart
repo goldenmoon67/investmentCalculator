@@ -1,4 +1,5 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ResultAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -31,7 +32,7 @@ class _ResultAppBarState extends State<ResultAppBar> {
         backgroundColor: AppColors.greyColor,
         elevation: 0,
         title: Text(
-          "Your Investment",
+          context.l10n.resultScreenAppBarTitle,
           style: TextStyle(
             color: AppColors.blueColor,
             fontSize: 32,

@@ -21,7 +21,9 @@ class SuggestionText extends StatelessWidget {
             color: Colors.grey,
           ),
           children: <TextSpan>[
-            const TextSpan(text: "* You should sell "),
+            const TextSpan(
+                text:
+                    "* You should sell "), //TODO::this will be added as a app_en.arb
             TextSpan(
               text: cryptoName,
               style: const TextStyle(

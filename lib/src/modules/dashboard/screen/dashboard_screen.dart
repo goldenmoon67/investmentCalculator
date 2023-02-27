@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 
@@ -45,13 +46,17 @@ BottomNavigationBar buildBottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.calculate), label: 'Calculate'),
+    items: [
       BottomNavigationBarItem(
-          icon: Icon(
-            Icons.wallet,
-          ),
-          label: 'Wallet'),
+        icon: const Icon(Icons.calculate),
+        label: context.l10n.bottombarItemHome,
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(
+          Icons.wallet,
+        ),
+        label: context.l10n.bottombarItemWallet,
+      ),
     ],
   );
 }
