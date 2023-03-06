@@ -1,3 +1,4 @@
+import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class SaveInvestmentButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.blueAccent.withOpacity(0.5),
+              color: AppColors.blueColor.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(0, 3),

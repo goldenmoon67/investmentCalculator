@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 enum SnackBarType {
@@ -43,12 +44,11 @@ class DialogUtils {
           Image.asset("assets/images/placeholder_coin.png"),
         ],
       ),
-      cancelBtnText: "Ignore",
-      confirmBtnText: "Download",
-      title: "Ooops!",
+      cancelBtnText: context.l10n.limitFullAlertDialogCancelBtn,
+      confirmBtnText: context.l10n.limitFullAlertDialogConfirmBtn,
+      title: context.l10n.limitFullAlertDialogTitle,
       type: CoolAlertType.confirm,
-      text:
-          "Your limit is full. You can download Investor Pro and use unlimitless.",
+      text: context.l10n.limitFullAlertDialogText,
     );
   }
 }

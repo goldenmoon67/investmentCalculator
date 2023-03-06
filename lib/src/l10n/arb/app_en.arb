@@ -34,29 +34,21 @@
   "goBackToStick": "Go back to stick",
   "howMany":  "How many",
   "desiredEarnings": "Desired earnings",
-  "enterMinPassword": "The password must be at least {length} characters long.",
-  "@enterMinPassword": {
-    "placeholders": {
-      "length": {
-        "type": "int"
-      }
-    }
-  },
+   "suggestionText" :"* You should sell <span class='important'>{cryptoName}</span> when <span class='important'>{cryptoSymbol} = $ {crypto_price}</span> !",
+   "@suggestionText" : {
+      "placeholders": {
+          "cryptoName": {},
+          "cryptoSymbol": {},
+          "crypto_price": {}
 
-  "countAttendees": "{count, plural, =0{No attendee} =1{{count} attendee} other{{count} attendees}}",
-  "@countAttendees": {
-    "placeholders": {
-      "count": {
-        "type": "int"
       }
-    }
-  },
-  "countMembers": "{count, plural, =0{No member} =1{{count} member} other{{count} members}}",
-  "@countMembers": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  }
+  
+   },
+   "nameValidatorValue":"Please Enter a right name",
+   "priceValidatorDotComma":"Please use (.) not (,)",
+   "percentValidatorValue": "Please Enter a right percent number",
+   "limitFullAlertDialogText": "Your limit is full. You can download Investor Pro and use unlimitless.",
+   "limitFullAlertDialogTitle":"Ooops!",
+   "limitFullAlertDialogConfirmBtn":"Download",
+    "limitFullAlertDialogCancelBtn":"Ignore"
 }
