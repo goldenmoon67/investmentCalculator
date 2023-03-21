@@ -14,8 +14,10 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+import '../../../utils/admob/ad_helper.dart';
 import '../bloc/home_screen_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Crypto? selectedCrypto;
   late TabController _tabController;
   final formKey = GlobalKey<FormState>();
+  BannerAd? _bannerAd;
+  bool isLoaded = true;
 
   @override
   void initState() {
@@ -43,6 +47,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _howMuchTextController = TextEditingController();
     _expectingProfitController = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {});
+        },
+        onAdFailedToLoad: (ad, err) {
+          debugPrint('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+    )..load();
     super.initState();
   }
 
@@ -54,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _howMuchTextController.dispose();
     _expectingProfitController.dispose();
     _tabController.dispose();
+    _bannerAd?.dispose();
+
     super.dispose();
   }
 
@@ -270,16 +290,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                CalculateButton(
-                  onPress: () {
-                    _tabController.index == 0
-                        ? _onPressForPercent(context)
-                        : _onPressForPrice(context);
-                  },
+                Expanded(
+                  child: Column(
+                    children: [
+                      CalculateButton(
+                        onPress: () {
+                          _tabController.index == 0
+                              ? _onPressForPercent(context)
+                              : _onPressForPrice(context);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      checkForAd(),
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 200,
-                )
               ],
             ),
           ),
@@ -337,6 +364,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           context,
         ),
       );
+    }
+  }
+
+  Widget checkForAd() {
+    if (_bannerAd != null) {
+      return Align(
+        alignment: Alignment.topCenter,
+        child: SizedBox(
+          width: _bannerAd!.size.width.toDouble(),
+          height: _bannerAd!.size.height.toDouble(),
+          child: AdWidget(ad: _bannerAd!),
+        ),
+      );
+    } else {
+      return const SizedBox();
     }
   }
 }

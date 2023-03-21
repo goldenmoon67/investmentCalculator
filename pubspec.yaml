@@ -70,8 +70,9 @@ dependencies:
   auto_route_generator: ^5.0.3
   awesome_snackbar_content: ^0.1.0
   cool_alert: ^1.1.0
-  flutter_widget_from_html_core: 0.10.0 
-  form_builder_validators: 8.5.0
+  flutter_widget_from_html_core: ^0.10.0 
+  form_builder_validators: ^8.5.0
+  google_mobile_ads: ^2.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
