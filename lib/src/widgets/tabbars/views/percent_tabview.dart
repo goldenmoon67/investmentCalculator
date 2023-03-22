@@ -26,9 +26,6 @@ class _PercentTabViewState extends State<PercentTabView> {
     return Column(
       children: [
         const SizedBox(
-          height: 10,
-        ),
-        const SizedBox(
           height: 20,
         ),
         Container(

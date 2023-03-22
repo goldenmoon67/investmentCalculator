@@ -2,6 +2,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/modules/favorite/bloc/favorite_event.dart';
+import 'package:crypto_price/src/utils/admob/ad_helper.dart';
 import 'package:crypto_price/src/utils/dialogs/dialog_utils.dart';
 import 'package:crypto_price/src/widgets/components/common_components/not_found_card.dart';
 import 'package:crypto_price/src/widgets/components/favorite_screen_components/favorite_card.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:crypto_price/src/l10n/l10n.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../bloc/favorite_bloc.dart';
 import '../bloc/favorite_state.dart';
@@ -22,8 +24,14 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   int recordCount = 0;
+  BannerAd? _bannerAd;
+  BannerAd? _bigBannerAd;
+
   @override
   void initState() {
+    _bannerAd = AdHelper.createBannerAd(AdHelper.favScreenBannerAdUnitId);
+    _bigBannerAd =
+        AdHelper.createBannerAdXL("ca-app-pub-3940256099942544/2934735716");
     super.initState();
   }
 
@@ -129,6 +137,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           )
         else
           const NotFoundCard(),
+        state.items.length == 0
+            ? AdHelper.getBannerAdWidget(_bigBannerAd)
+            : AdHelper.getBannerAdWidget(_bannerAd),
       ],
     );
   }
@@ -144,6 +155,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           context.l10n.recordDeletedMessage,
           SnackBarType.succes,
         );
+        setState(() {});
       },
       child: FavoriteCard(item: item),
     );

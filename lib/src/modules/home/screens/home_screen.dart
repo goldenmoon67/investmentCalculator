@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   final formKey = GlobalKey<FormState>();
   BannerAd? _bannerAd;
-  bool isLoaded = true;
 
   @override
   void initState() {
@@ -47,20 +46,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _howMuchTextController = TextEditingController();
     _expectingProfitController = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
-    _bannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {});
-        },
-        onAdFailedToLoad: (ad, err) {
-          debugPrint('Failed to load a banner ad: ${err.message}');
-          ad.dispose();
-        },
-      ),
-    )..load();
+    _bannerAd = AdHelper.createBannerAd(AdHelper.homeScreenBannerAdUnitId);
     super.initState();
   }
 
@@ -141,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(
-                  height: 80,
+                  height: 50,
                 ),
                 TabbarWidget(tabController: _tabController),
                 const SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 Text(context.l10n.investment),
                 DropdownSearch<Crypto>(
@@ -276,7 +262,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }),
                   ),
                 ),
-                Expanded(
+                SizedBox(
+                  height: 200,
                   child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _tabController,
@@ -290,9 +277,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                Expanded(
+                SizedBox(
+                  height: 130,
                   child: Column(
                     children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
                       CalculateButton(
                         onPress: () {
                           _tabController.index == 0
@@ -303,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       const SizedBox(
                         height: 20,
                       ),
-                      checkForAd(),
+                      AdHelper.getBannerAdWidget(_bannerAd),
                     ],
                   ),
                 ),
@@ -364,21 +355,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           context,
         ),
       );
-    }
-  }
-
-  Widget checkForAd() {
-    if (_bannerAd != null) {
-      return Align(
-        alignment: Alignment.topCenter,
-        child: SizedBox(
-          width: _bannerAd!.size.width.toDouble(),
-          height: _bannerAd!.size.height.toDouble(),
-          child: AdWidget(ad: _bannerAd!),
-        ),
-      );
-    } else {
-      return const SizedBox();
     }
   }
 }

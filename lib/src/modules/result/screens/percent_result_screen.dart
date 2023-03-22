@@ -3,6 +3,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/percent_result_model.dart';
+import 'package:crypto_price/src/utils/admob/ad_helper.dart';
 import 'package:crypto_price/src/utils/dialogs/dialog_utils.dart';
 import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
@@ -14,6 +15,7 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/sug
 import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../widgets/components/result_screen_components/investment_item.dart';
 import '../bloc/result_screen_bloc.dart';
@@ -30,8 +32,14 @@ class PercentResultScreen extends StatefulWidget {
 class _PercentResultScreenState extends State<PercentResultScreen> {
   late Crypto crypto;
   late PercentResult percentResult;
+  InterstitialAd? _interstitialAd;
+
   @override
   void initState() {
+    AdHelper.createInterstitialAd("ca-app-pub-3940256099942544/1033173712",
+        (ad) {
+      _interstitialAd = ad;
+    });
     crypto = widget.percentResult.crypto;
     percentResult = widget.percentResult;
     super.initState();
@@ -44,9 +52,10 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
-            context.router.setRoot(const DashBoardRoute(children: [
-              FavoriteRoute(),
-            ]));
+            if (_interstitialAd != null) {
+              _interstitialAd!.show();
+            }
+            _route();
           } else if (state is ResultScreenErrorState) {
             DialogUtils.showLimitFullDialog(context);
           }
@@ -132,5 +141,13 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _route() async {
+    await Future.delayed(const Duration(seconds: 2));
+    // ignore: use_build_context_synchronously
+    context.router.setRoot(const DashBoardRoute(children: [
+      FavoriteRoute(),
+    ]));
   }
 }
