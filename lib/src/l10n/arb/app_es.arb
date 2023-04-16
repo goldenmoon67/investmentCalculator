@@ -1,0 +1,54 @@
+{
+  "appTitle": "inviértelo",
+  "@appTitle": {
+    "description": "El título de la aplicación"
+  },
+  "bottombarItemHome": "Calcular",
+  "bottombarItemWallet": "Billetera",
+  "investment": "Inversión",
+  "dropdownMenuPlaceHolderText": "Elige tu inversión",
+  "currentRangeTitleText": "Rango actual de inversión",
+  "favoriteTabTitle":"Billetera",
+  "recordCountTitle": "Registro: ",
+  "succesSnackbarTitle": "Éxito",
+  "recordDeletedMessage":"El registro ha sido eliminado",
+  "resultScreenAppBarTitle":"Tu inversión",
+  "backToCalculateButtonTitle":   "Volver a calcular",
+  "calculateButtonTitle":"Calcular",
+  "saveInvestmentButtonTitle":"Guardar",
+  "notFoundMessage":  "No hay nada aquí",
+  "desiredEarnings":      "Ganancias deseadas:",
+  "purchasePrice":  "Precio de compra:",
+  "sellingPrice":   "Precio de venta:",
+  "createdTime":  "Hora de creación:",
+  "investmentItemColumnTitle1" : "Inversión",
+  "investmentItemColumnTitle2" :  "Total",
+  "investmentItemColumnTitle3" :  "Precio actual",
+  "profitItemTitle" :   "Tu ganancia deseada: ",
+  "suggestionItemPriceToSell":     "Precio de venta",
+  "tabbarTitle1":   "Porcentaje",
+  "tabbarTitle2":  "Precio",
+  "precentTabDesiredProfitTitle":"Margen de ganancia deseado",
+  "moreThan100": "¿Más de 100%?",
+  "profitRateYouWant":  "Tasa de ganancia deseada",
+  "goBackToStick": "Volver a la lista",
+  "howMany":  "¿Cuántos?",
+  "desiredEarnings": "Ganancias deseadas",
+  "suggestionText" :"* ¡Deberías vender <span class='important'>{cryptoName}</span> cuando <span class='important'>{cryptoSymbol} = $ {crypto_price}</span>!",
+   "@suggestionText" : {
+      "placeholders": {
+          "cryptoName": {},
+          "cryptoSymbol": {},
+          "crypto_price": {}
+
+      }
+  
+   },
+   "nameValidatorValue":"Por favor, ingresa un nombre correcto",
+   "priceValidatorDotComma":"Por favor, use (.) en lugar de (,)",
+   "percentValidatorValue": "Por favor, ingresa un número de porcentaje correcto",
+   "limitFullAlertDialogText": "Tu límite está completo. Puedes descargar Investor Pro y utilizarlo sin límites.",
+   "limitFullAlertDialogTitle":"¡Oops!",
+   "limitFullAlertDialogConfirmBtn":"Descargar",
+    "limitFullAlertDialogCancelBtn":"Ignorar"
+}

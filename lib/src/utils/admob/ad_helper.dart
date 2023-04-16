@@ -25,22 +25,20 @@ class AdHelper {
   }
 
   static String get favScreenXLBannerAdUnitId {
-    //TODO::it will be added
     if (Platform.isAndroid) {
-      return 'ca-app-pub-5819341208757085/5438244454';
+      return 'ca-app-pub-5819341208757085/8167337812';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-5819341208757085/5491598233';
+      return 'ca-app-pub-5819341208757085/4398912370';
     } else {
       throw UnsupportedError('Unsupported platform');
     }
   }
 
   static String get saveFavsBannerAdUnitId {
-    //TODO::it will be added
     if (Platform.isAndroid) {
-      return 'ca-app-pub-5819341208757085/5438244454';
+      return 'ca-app-pub-5819341208757085/3238444764';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-5819341208757085/5491598233';
+      return 'ca-app-pub-5819341208757085/9790839850';
     } else {
       throw UnsupportedError('Unsupported platform');
     }
@@ -82,9 +80,7 @@ class AdHelper {
         adUnitId: adUnitId,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
-          // Called when an ad is successfully received.
           onAdLoaded: onAdLoaded,
-          // Called when an ad request failed.
           onAdFailedToLoad: (LoadAdError error) {
             debugPrint('InterstitialAd failed to load: $error');
           },

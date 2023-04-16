@@ -36,8 +36,7 @@ class _PercentResultScreenState extends State<PercentResultScreen> {
 
   @override
   void initState() {
-    AdHelper.createInterstitialAd("ca-app-pub-3940256099942544/1033173712",
-        (ad) {
+    AdHelper.createInterstitialAd(AdHelper.saveFavsBannerAdUnitId, (ad) {
       _interstitialAd = ad;
     });
     crypto = widget.percentResult.crypto;

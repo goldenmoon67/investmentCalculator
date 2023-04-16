@@ -1,0 +1,51 @@
+{
+"appTitle": "investir",
+"@appTitle": {
+"description": "Le titre de l'application"
+},
+"bottombarItemHome": "Calculer",
+"bottombarItemWallet": "Portefeuille",
+"investment": "Investissement",
+"dropdownMenuPlaceHolderText": "Choisissez votre investissement",
+"currentRangeTitleText": "Plage actuelle d'investissement",
+"favoriteTabTitle": "Portefeuille",
+"recordCountTitle": "Enregistrement: ",
+"succesSnackbarTitle": "Succès",
+"recordDeletedMessage": "L'enregistrement a été supprimé",
+"resultScreenAppBarTitle": "Votre investissement",
+"backToCalculateButtonTitle": "Retour au calcul",
+"calculateButtonTitle": "Calculer",
+"saveInvestmentButtonTitle": "Sauvegarder",
+"notFoundMessage": "Il n'y a rien là-dedans",
+"desiredEarnings": "Gains souhaités :",
+"purchasePrice": "Prix d'achat :",
+"sellingPrice": "Prix de vente :",
+"createdTime": "Temps de création :",
+"investmentItemColumnTitle1": "Investissement",
+"investmentItemColumnTitle2": "Total",
+"investmentItemColumnTitle3": "Prix actuel",
+"profitItemTitle": "Profit que vous souhaitez :",
+"suggestionItemPriceToSell": "Prix de vente",
+"tabbarTitle1": "Pourcentage",
+"tabbarTitle2": "Prix",
+"precentTabDesiredProfitTitle": "Marge de profit souhaitée",
+"moreThan100": "Plus de 100 % ?",
+"profitRateYouWant": "Taux de profit souhaité",
+"goBackToStick": "Retour au stick",
+"howMany": "Combien",
+"suggestionText": "* Vous devriez vendre <span class='important'>{cryptoName}</span> lorsque <span class='important'>{cryptoSymbol} = {crypto_price} $</span> !",
+"@suggestionText": {
+"placeholders": {
+"cryptoName": {},
+"cryptoSymbol": {},
+"crypto_price": {}
+}
+},
+"nameValidatorValue": "Veuillez saisir un nom correct",
+"priceValidatorDotComma": "Veuillez utiliser (.) et non (,)",
+"percentValidatorValue": "Veuillez saisir un nombre de pourcentage correct",
+"limitFullAlertDialogText": "Votre limite est atteinte. Vous pouvez télécharger Investor Pro et l'utiliser sans limite.",
+"limitFullAlertDialogTitle": "Oups !",
+"limitFullAlertDialogConfirmBtn": "Télécharger",
+"limitFullAlertDialogCancelBtn": "Ignorer"
+}

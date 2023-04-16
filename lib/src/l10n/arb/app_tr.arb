@@ -1,0 +1,52 @@
+{
+"appTitle": "InvestIt",
+"@appTitle": {
+"description": "Uygulama başlığı"
+},
+"bottombarItemHome": "Hesapla",
+"bottombarItemWallet": "Cüzdan",
+"investment": "Yatırım",
+"dropdownMenuPlaceHolderText": "Yatırımınızı seçin",
+"currentRangeTitleText": "Mevcut Yatırım Aralığı",
+"favoriteTabTitle":"Cüzdan",
+"recordCountTitle": "Kayıt: ",
+"succesSnackbarTitle": "Başarılı",
+"recordDeletedMessage":"Kayıt silindi",
+"resultScreenAppBarTitle":"Yatırımınız",
+"backToCalculateButtonTitle": "Hesaplamaya geri dön",
+"calculateButtonTitle":"Hesapla",
+"saveInvestmentButtonTitle":"Kaydet",
+"notFoundMessage": "Hiçbir şey bulunamadı",
+"desiredEarnings": "Hedef kar:",
+"purchasePrice": "Alış fiyatı:",
+"sellingPrice": "Satış fiyatı:",
+"createdTime": "Oluşturulma zamanı:",
+"investmentItemColumnTitle1" : "Yatırım",
+"investmentItemColumnTitle2" : "Toplam",
+"investmentItemColumnTitle3" : "Mevcut Fiyat",
+"profitItemTitle" : "İstediğiniz kar: ",
+"suggestionItemPriceToSell": "Satış Fiyatı",
+"tabbarTitle1": "Yüzde",
+"tabbarTitle2": "Fiyat",
+"precentTabDesiredProfitTitle":"Hedef kar marjı",
+"moreThan100": "100%'den fazla?",
+"profitRateYouWant": "İstediğiniz kar oranı",
+"goBackToStick": "Çubuğa geri dön",
+"howMany": "Kaç tane",
+"desiredEarnings": "Hedef kar",
+"suggestionText" :"* <span class='important'>{cryptoName}</span> satmanız gerekiyor: <span class='important'>{cryptoSymbol} = $ {crypto_price}</span> !",
+"@suggestionText" : {
+"placeholders": {
+"cryptoName": {},
+"cryptoSymbol": {},
+"crypto_price": {}
+  }
+},
+"nameValidatorValue":"Lütfen doğru bir isim girin",
+"priceValidatorDotComma":"Lütfen (,) yerine (.) kullanın",
+"percentValidatorValue": "Lütfen doğru bir yüzde sayısı girin",
+"limitFullAlertDialogText": "Sınırlamanız dolu. Investor Pro'yu indirip sınırsız kullanabilirsiniz.",
+"limitFullAlertDialogTitle":"Hata!",
+"limitFullAlertDialogConfirmBtn":"İndir",
+"limitFullAlertDialogCancelBtn":"Yok say"
+}

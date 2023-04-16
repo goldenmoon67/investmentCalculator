@@ -1,0 +1,52 @@
+{
+"appTitle": "investi",
+"@appTitle": {
+"description": "Il titolo dell'applicazione"
+},
+"bottombarItemHome": "Calcola",
+"bottombarItemWallet": "Portafoglio",
+"investment": "Investimento",
+"dropdownMenuPlaceHolderText": "Scegli il tuo investimento",
+"currentRangeTitleText": "Intervallo di Investimento Attuale",
+"favoriteTabTitle":"Portafoglio",
+"recordCountTitle": "Record: ",
+"succesSnackbarTitle": "Successo",
+"recordDeletedMessage":"Record eliminato",
+"resultScreenAppBarTitle":"Il Tuo Investimento",
+"backToCalculateButtonTitle": "Torna al Calcolo",
+"calculateButtonTitle":"Calcola",
+"saveInvestmentButtonTitle":"Salva",
+"notFoundMessage": "Non c'è nulla qui",
+"desiredEarnings": "Guadagno desiderato:",
+"purchasePrice": "Prezzo di acquisto:",
+"sellingPrice": "Prezzo di vendita:",
+"createdTime": "Data di creazione:",
+"investmentItemColumnTitle1" : "Investimento",
+"investmentItemColumnTitle2" : "Totale",
+"investmentItemColumnTitle3" : "Prezzo Corrente",
+"profitItemTitle" : "Profitto Desiderato: ",
+"suggestionItemPriceToSell": "Prezzo di Vendita",
+"tabbarTitle1": "percentuale",
+"tabbarTitle2": "prezzo",
+"precentTabDesiredProfitTitle":"Margine di Profitto Desiderato",
+"moreThan100": "Più del 100%?",
+"profitRateYouWant": "Tasso di Profitto Desiderato",
+"goBackToStick": "Torna a Stick",
+"howMany": "Quanti",
+"desiredEarnings": "Guadagno desiderato",
+"suggestionText" :"* Dovresti vendere <span class='important'>{cryptoName}</span> quando <span class='important'>{cryptoSymbol} = $ {crypto_price}</span> !",
+"@suggestionText" : {
+"placeholders": {
+"cryptoName": {},
+"cryptoSymbol": {},
+"crypto_price": {}
+  }
+},
+"nameValidatorValue":"Per favore inserisci un nome corretto",
+"priceValidatorDotComma":"Per favore usa (.) invece di (,)",
+"percentValidatorValue": "Per favore inserisci un numero percentuale corretto",
+"limitFullAlertDialogText": "Il tuo limite è stato raggiunto. Puoi scaricare Investor Pro e usare l'app in modo illimitato.",
+"limitFullAlertDialogTitle":"Oops!",
+"limitFullAlertDialogConfirmBtn":"Scarica",
+"limitFullAlertDialogCancelBtn":"Ignora"
+}

@@ -1,0 +1,50 @@
+{
+"appTitle": "استثمرها",
+"@appTitle": {
+"description": "اسم التطبيق"
+},
+"bottombarItemHome": "حساب",
+"bottombarItemWallet": "محفظة",
+"investment": "استثمار",
+"dropdownMenuPlaceHolderText": "اختر استثمارك",
+"currentRangeTitleText": "النطاق الحالي للاستثمار",
+"favoriteTabTitle":"محفظة",
+"recordCountTitle": "سجل: ",
+"succesSnackbarTitle": "نجاح",
+"recordDeletedMessage":"تم حذف السجل",
+"resultScreenAppBarTitle":"استثمارك",
+"backToCalculateButtonTitle": "العودة للحساب",
+"calculateButtonTitle":"احسب",
+"saveInvestmentButtonTitle":"احفظ",
+"notFoundMessage": "لا يوجد شيء هنا",
+"desiredEarnings": "الأرباح المرغوبة:",
+"purchasePrice": "سعر الشراء:",
+"sellingPrice": "سعر البيع:",
+"createdTime": "وقت الإنشاء:",
+"investmentItemColumnTitle1" : "استثمار",
+"investmentItemColumnTitle2" : "المجموع",
+"investmentItemColumnTitle3" : "السعر الحالي",
+"profitItemTitle" : "الربح المطلوب: ",
+"suggestionItemPriceToSell": "سعر البيع",
+"tabbarTitle1": "نسبة",
+"tabbarTitle2": "السعر",
+"precentTabDesiredProfitTitle":"نسبة الربح المطلوبة",
+"moreThan100": "أكثر من 100%؟",
+"profitRateYouWant": "نسبة الربح المرغوبة",
+"goBackToStick": "العودة إلى الاستثمار",
+"howMany": "كم عدد",
+"desiredEarnings": "الأرباح المرغوبة",
+"suggestionText" :"* يجب بيع <span class='important'>{cryptoName}</span> عندما يكون <span class='important'>{cryptoSymbol} = {crypto_price} دولارًا</span>!",
+"@suggestionText" : {
+"placeholders": {
+"cryptoName": {},
+"cryptoSymbol": {},
+"crypto_price": {}
+
+Copy code
+  }
+},
+"nameValidatorValue":"يرجى إدخال اسم صحيح",
+"priceValidatorDotComma":"يرجى استخدام (.) وليس (،)",
+"percentValidatorValue": "يرجى إدخال نسبة صحيحة",
+"limitFullAlertDialogText": "لقد تم الوصول إلى حد استخدامك. يمكنك تنزيل Investor Pro واستخدامه بلا}

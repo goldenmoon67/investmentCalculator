@@ -3,6 +3,7 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/favorite/favorite_model.dart';
 import 'package:crypto_price/src/data/models/result_models/price_result_model.dart';
+import 'package:crypto_price/src/utils/admob/ad_helper.dart';
 import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:crypto_price/src/widgets/appbars/result_appbar.dart';
 import 'package:crypto_price/src/widgets/buttons/back_to_calculate_button.dart';
@@ -14,6 +15,7 @@ import 'package:crypto_price/src/widgets/components/result_screen_components/sug
 import 'package:crypto_price/src/widgets/components/result_screen_components/suggestion_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../utils/dialogs/dialog_utils.dart';
 import '../bloc/result_screen_bloc.dart';
 
@@ -29,8 +31,13 @@ class PriceResultScreen extends StatefulWidget {
 class _PriceResultScreenState extends State<PriceResultScreen> {
   late Crypto crypto;
   late PriceResult priceResult;
+  InterstitialAd? _interstitialAd;
+
   @override
   void initState() {
+    AdHelper.createInterstitialAd(AdHelper.saveFavsBannerAdUnitId, (ad) {
+      _interstitialAd = ad;
+    });
     crypto = widget.priceResult.crypto;
     priceResult = widget.priceResult;
     super.initState();
@@ -38,15 +45,15 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(crypto.icon);
-
     return BlocProvider(
       create: (context) => ResultScreenBloc(),
       child: BlocConsumer<ResultScreenBloc, ResultScreenState>(
         listener: (context, state) {
           if (state is SavedItemData && state.succes) {
-            context.router
-                .setRoot(const DashBoardRoute(children: [FavoriteRoute()]));
+            if (_interstitialAd != null) {
+              _interstitialAd!.show();
+            }
+            _route();
           } else if (state is ResultScreenErrorState) {
             DialogUtils.showSnackbar(
                 context, "Error", state.message, SnackBarType.error);
@@ -133,5 +140,9 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
         ],
       ),
     );
+  }
+
+  void _route() {
+    context.router.setRoot(const DashBoardRoute(children: [FavoriteRoute()]));
   }
 }

@@ -1,0 +1,53 @@
+{
+"appTitle": "invest it",
+"@appTitle": {
+"description": "O título do aplicativo"
+},
+"bottombarItemHome": "Calcular",
+"bottombarItemWallet": "Carteira",
+"investment": "Investimento",
+"dropdownMenuPlaceHolderText": "Escolha seu investimento",
+"currentRangeTitleText": "Faixa atual de investimento",
+"favoriteTabTitle":"Carteira",
+"recordCountTitle": "Registro: ",
+"succesSnackbarTitle": "Sucesso",
+"recordDeletedMessage":"Registro foi excluído",
+"resultScreenAppBarTitle":"Seu Investimento",
+"backToCalculateButtonTitle": "Voltar para Calcular",
+"calculateButtonTitle":"Calcular",
+"saveInvestmentButtonTitle":"Salvar",
+"notFoundMessage": "Não há nada aqui",
+"desiredEarnings": "Lucro desejado:",
+"purchasePrice": "Preço de compra:",
+"sellingPrice": "Preço de venda:",
+"createdTime": "Tempo criado:",
+"investmentItemColumnTitle1" : "Investimento",
+"investmentItemColumnTitle2" : "Total",
+"investmentItemColumnTitle3" : "Preço atual",
+"profitItemTitle" : "Lucro Desejado: ",
+"suggestionItemPriceToSell": "Preço para vender",
+"tabbarTitle1": "percentagem",
+"tabbarTitle2": "preço",
+"precentTabDesiredProfitTitle":"Margem de lucro desejada",
+"moreThan100": "Mais de 100%?",
+"profitRateYouWant": "Taxa de lucro desejada",
+"goBackToStick": "Voltar ao stick",
+"howMany": "Quantos",
+"desiredEarnings": "Lucro desejado",
+"suggestionText" :"* Você deve vender <span class='important'>{cryptoName}</span> quando <span class='important'>{cryptoSymbol} = R$ {crypto_price}</span> !",
+"@suggestionText" : {
+"placeholders": {
+"cryptoName": {},
+"cryptoSymbol": {},
+"crypto_price": {}
+  
+  }
+},
+"nameValidatorValue":"Por favor, insira um nome correto",
+"priceValidatorDotComma":"Por favor, use (.) não (,)",
+"percentValidatorValue": "Por favor, insira um número percentual correto",
+"limitFullAlertDialogText": "Seu limite está cheio. Você pode baixar o Investor Pro e usar sem limites.",
+"limitFullAlertDialogTitle":"Ooops!",
+"limitFullAlertDialogConfirmBtn":"Baixar",
+"limitFullAlertDialogCancelBtn":"Ignorar"
+}
