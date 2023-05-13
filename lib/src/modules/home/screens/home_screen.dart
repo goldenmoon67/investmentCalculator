@@ -1,11 +1,15 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
+import 'package:crypto_price/src/consts/languages/supported_languages.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
+import 'package:crypto_price/src/data/models/language/language_model.dart';
 import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
+import 'package:crypto_price/src/widgets/language/language_component.dart';
 import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';
 import 'package:crypto_price/src/widgets/inputs/text_form_field.dart';
 import 'package:crypto_price/src/widgets/tabbars/views/percent_tabview.dart';
@@ -104,6 +108,36 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           Widget content = getInitial(context, state);
           return Scaffold(
             backgroundColor: Colors.white,
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.white,
+              toolbarHeight: 40,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    _openLanguageSettings(context);
+                  },
+                  icon: Icon(
+                    Icons.language,
+                    color: AppColors.blueColor,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.quiz_sharp,
+                    color: AppColors.blueColor,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.all_inclusive_rounded,
+                    color: AppColors.greenColor,
+                  ),
+                ),
+              ],
+            ),
             body: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: content,
@@ -117,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget getInitial(BuildContext context, state) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Center(
         child: Form(
           key: formKey,
@@ -126,8 +160,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(
-                  height: 50,
+                Center(
+                  child: SizedBox(
+                    height: 120,
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                    ),
+                  ),
                 ),
                 TabbarWidget(tabController: _tabController),
                 const SizedBox(
@@ -356,5 +395,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       );
     }
+  }
+
+  Future<void> _openLanguageSettings(BuildContext context) async {
+    List<LanguageModel> languages = SupportedLanguages.getAllLanguages();
+    var dialog = AwesomeDialog(
+      context: context,
+      btnOkColor: AppColors.blueColor,
+      animType: AnimType.scale,
+      dialogType: DialogType.info,
+      body: LanguageComponent(languages: languages),
+      title: 'This is Ignored',
+      desc: 'This is also Ignored',
+      btnOkOnPress: () {},
+    );
+    dialog.show();
+    debugPrint(AppLocalizations.of(context).localeName);
   }
 }

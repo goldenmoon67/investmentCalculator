@@ -50,5 +50,7 @@
    "limitFullAlertDialogText": "Your limit is full. You can download Investor Pro and use unlimitless.",
    "limitFullAlertDialogTitle":"Ooops!",
    "limitFullAlertDialogConfirmBtn":"Download",
-    "limitFullAlertDialogCancelBtn":"Ignore"
+    "limitFullAlertDialogCancelBtn":"Ignore",
+    "supportedLanguagesTitle":  "Supported Language",
+    "supportedLanguagesDesc":"The following languages are supported, and the application language will be automatically changed based on the language of your device's usage."
 }

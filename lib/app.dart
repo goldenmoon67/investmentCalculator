@@ -21,6 +21,15 @@ class _MyAppState extends State<MyApp> {
       routerDelegate: _appRouter.delegate(
         initialRoutes: [const DashBoardRoute()],
       ),
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        for (var locale in supportedLocales) {
+          if (locale.languageCode == deviceLocale!.languageCode &&
+              locale.countryCode == deviceLocale.countryCode) {
+            return deviceLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -28,6 +37,7 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         FormBuilderLocalizations.delegate,
       ],
+
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateTitle: (BuildContext context) => context.l10n.appTitle,
 

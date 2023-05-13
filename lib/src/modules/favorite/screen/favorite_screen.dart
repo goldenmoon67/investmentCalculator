@@ -31,7 +31,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     _bannerAd = AdHelper.createBannerAd(AdHelper.favScreenBannerAdUnitId);
     _bigBannerAd =
-        AdHelper.createBannerAdXL("ca-app-pub-3940256099942544/2934735716");
+        AdHelper.createBannerAdXL(AdHelper.favScreenXLBannerAdUnitId);
     super.initState();
   }
 
