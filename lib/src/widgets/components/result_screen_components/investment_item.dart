@@ -34,11 +34,8 @@ class InvestmentItem extends StatelessWidget {
             imageUrl: imageUrl,
             fit: BoxFit.cover,
             errorWidget: (context, url, error) {
-              return const Center(
-                child: Icon(
-                  Icons.dangerous,
-                  color: Colors.black,
-                ),
+              return Center(
+                child: Image.asset("assets/images/placeholder_coin.png"),
               );
             },
           ),

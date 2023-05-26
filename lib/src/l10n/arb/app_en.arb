@@ -52,5 +52,20 @@
    "limitFullAlertDialogConfirmBtn":"Download",
     "limitFullAlertDialogCancelBtn":"Ignore",
     "supportedLanguagesTitle":  "Supported Language",
-    "supportedLanguagesDesc":"The following languages are supported, and the application language will be automatically changed based on the language of your device's usage."
+    "supportedLanguagesDesc":"The following languages are supported, and the application language will be automatically changed based on the language of your device's usage.",
+    "newForTitle":"New",
+    "features":"Features",
+    "very":"Very",
+    "soon":"Soon",
+    "proAppFeatureRealDataTitle":"Real-time cryptocurrency data",
+    "proAppFeatureRealDataDesc": "Real-time cryptocurrency data with instant coin prices using the CoinMarketCap API.",
+    "proAppFeatureRealNotiTitle":"Real-time notifications.",
+    "proAppFeatureRealNotiDesc":"Instant notifications are received for selling when the coins in your wallet reach the target profit margin.",
+    "proAppFeatureWalletTitle":"More effective Wallet",
+    "proAppFeatureWalletDesc":"Monitor the real-time profit/loss status of the coins you have added to your wallet. See how close you are to reaching your target.",
+    "proAppFeatureFunctionsTitle":"More calculation functions.",
+    "proAppFeatureFunctionsDesc":"Perform frequently needed calculations with the new functions at the touch of a button.",
+    "ok":"Okay"
+
+
 }

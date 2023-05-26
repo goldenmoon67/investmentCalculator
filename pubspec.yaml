@@ -50,14 +50,12 @@ dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0 # Provides internationalization and l10n facilities
+  intl: ^0.18.0 # Provides internationalization and l10n facilities
 
   localization: ^2.1.0
   dropdown_search: ^5.0.2
-  easy_loading: ^0.0.4
   flutter_easyloading: ^3.0.5
   lottie: ^1.4.3
-  gradient_button: ^0.0.4
   cached_network_image: ^3.2.3
   dropdown_search2: ^1.0.2
   hive: ^2.2.3
@@ -71,9 +69,11 @@ dependencies:
   awesome_snackbar_content: ^0.1.0
   cool_alert: ^1.1.0
   flutter_widget_from_html_core: ^0.10.0 
-  form_builder_validators: ^8.5.0
+  form_builder_validators: ^9.0.0
   google_mobile_ads: ^2.3.0
   awesome_dialog: ^3.0.2
+  animated_text_kit: ^4.2.2
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:

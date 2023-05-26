@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:crypto_price/src/modules/result/screens/percent_result_screen.da
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
+import 'package:crypto_price/src/widgets/components/home_components/pro_app_features.dart';
 import 'package:crypto_price/src/widgets/language/language_component.dart';
 import 'package:crypto_price/src/widgets/tabbars/tabs/tabbar.dart';
 import 'package:crypto_price/src/widgets/inputs/text_form_field.dart';
@@ -18,6 +20,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -41,6 +44,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   final formKey = GlobalKey<FormState>();
   BannerAd? _bannerAd;
+  final colorizeColors = [
+    Colors.red,
+    Colors.yellow,
+    Colors.blue,
+  ];
 
   @override
   void initState() {
@@ -111,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.white,
-              toolbarHeight: 40,
+              toolbarHeight: 45,
               actions: [
                 IconButton(
                   onPressed: () {
@@ -122,18 +130,58 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     color: AppColors.blueColor,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.quiz_sharp,
-                    color: AppColors.blueColor,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.all_inclusive_rounded,
-                    color: AppColors.greenColor,
+                InkWell(
+                  onTap: () {
+                    _openProFeatures();
+                  },
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      textTheme: GoogleFonts.pacificoTextTheme(),
+                    ),
+                    child: Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        color: AppColors.blueColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.touch_app_outlined,
+                                color: Colors.white,
+                              ),
+                              AnimatedTextKit(
+                                repeatForever: true,
+                                animatedTexts: [
+                                  ColorizeAnimatedText(
+                                    textStyle: const TextStyle(
+                                      fontSize: 30,
+                                    ),
+                                    context.l10n.newForTitle,
+                                    colors: colorizeColors,
+                                  ),
+                                  ColorizeAnimatedText(
+                                    textStyle: const TextStyle(
+                                      fontSize: 30,
+                                    ),
+                                    context.l10n.features,
+                                    colors: colorizeColors,
+                                  ),
+                                ],
+                                onTap: () {
+                                  _openProFeatures();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -220,11 +268,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   imageUrl: selectedItem.icon ?? "",
                                   fit: BoxFit.cover,
                                   errorWidget: (context, url, error) {
-                                    return const Center(
-                                      child: Icon(
-                                        Icons.dangerous,
-                                        color: Colors.black,
-                                      ),
+                                    return Center(
+                                      child: Image.asset(
+                                          "assets/images/placeholder_coin.png"),
                                     );
                                   },
                                 ),
@@ -405,9 +451,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       animType: AnimType.scale,
       dialogType: DialogType.info,
       body: LanguageComponent(languages: languages),
-      title: 'This is Ignored',
-      desc: 'This is also Ignored',
       btnOkOnPress: () {},
+    );
+    dialog.show();
+    debugPrint(AppLocalizations.of(context).localeName);
+  }
+
+  void _openProFeatures() {
+    var dialog = AwesomeDialog(
+      context: context,
+      btnOkColor: AppColors.blueColor,
+      animType: AnimType.topSlide,
+      dialogType: DialogType.noHeader,
+      dialogBackgroundColor: AppColors.blueColor,
+      body: const ProAppFeatures(),
     );
     dialog.show();
     debugPrint(AppLocalizations.of(context).localeName);

@@ -4,6 +4,7 @@ import 'package:crypto_price/src/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: buildTheme(Brightness.light),
       routerDelegate: _appRouter.delegate(
         initialRoutes: [const DashBoardRoute()],
       ),
@@ -48,5 +50,11 @@ class _MyAppState extends State<MyApp> {
       routeInformationProvider: _appRouter.routeInfoProvider(),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );
+  }
+
+  buildTheme(Brightness light) {
+    var baseTheme = ThemeData(brightness: light);
+
+    return baseTheme.copyWith(textTheme: GoogleFonts.arimoTextTheme());
   }
 }
