@@ -5,9 +5,12 @@ import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/consts/languages/supported_languages.dart';
 import 'package:crypto_price/src/data/models/crypto/crypto.dart';
 import 'package:crypto_price/src/data/models/language/language_model.dart';
+import 'package:crypto_price/src/getit.dart';
 import 'package:crypto_price/src/l10n/l10n.dart';
 import 'package:crypto_price/src/modules/result/screens/percent_result_screen.dart';
 import 'package:crypto_price/src/modules/result/screens/price_result_screen.dart';
+import 'package:crypto_price/src/repositories/calculate_repository.dart';
+import 'package:crypto_price/src/utils/dialogs/dialog_utils.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/buttons/calculate_button.dart';
 import 'package:crypto_price/src/widgets/components/home_components/pro_app_features.dart';
@@ -395,24 +398,46 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
     if (valid) {
-      final String name = selectedCrypto?.name ?? "";
-      final double percent = _percentController.text == ""
-          ? 0
-          : double.parse(_percentController.text);
-      final double currentPrice = double.parse(_currentRangeController.text);
-      BlocProvider.of<HomeScreenBloc>(context).add(
-        CalculateWithPercent(
-          percent,
-          currentPrice,
+      if (selectedCrypto == null) {
+        DialogUtils.showSnackbar(
           context,
-          name,
-        ),
-      );
-      BlocProvider.of<HomeScreenBloc>(context).add(
-        HomeScreenStartEvent(
-          context,
-        ),
-      );
+          context.l10n.requiredField,
+          context.l10n.requiredInvestmentItem,
+          SnackBarType.warning,
+        );
+      } else {
+        final CalculateRepositroy calculateRepositroy =
+            getIt<CalculateRepositroy>();
+        double? sliderValue = calculateRepositroy.getSliderValue();
+        if (_percentController.text == "" && sliderValue == null) {
+          DialogUtils.showSnackbar(
+            context,
+            context.l10n.requiredField,
+            context.l10n.requiredPercent,
+            SnackBarType.warning,
+          );
+        } else {
+          final String name = selectedCrypto?.name ?? "";
+          final double percent = _percentController.text == ""
+              ? 0
+              : double.parse(_percentController.text);
+          final double currentPrice =
+              double.parse(_currentRangeController.text);
+          BlocProvider.of<HomeScreenBloc>(context).add(
+            CalculateWithPercent(
+              percent,
+              currentPrice,
+              context,
+              name,
+            ),
+          );
+          BlocProvider.of<HomeScreenBloc>(context).add(
+            HomeScreenStartEvent(
+              context,
+            ),
+          );
+        }
+      }
     }
   }
 
@@ -420,26 +445,35 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
     if (valid) {
-      final String name = selectedCrypto?.name ?? "";
-
-      final double howMuch = double.parse(_howMuchTextController.text);
-      final double currentPrice = double.parse(_currentRangeController.text);
-      final double expect = double.parse(_expectingProfitController.text);
-
-      BlocProvider.of<HomeScreenBloc>(context).add(
-        CalculateWithPrice(
-          name,
-          currentPrice,
-          howMuch,
-          expect,
+      if (selectedCrypto == null) {
+        DialogUtils.showSnackbar(
           context,
-        ),
-      );
-      BlocProvider.of<HomeScreenBloc>(context).add(
-        HomeScreenStartEvent(
-          context,
-        ),
-      );
+          context.l10n.requiredField,
+          context.l10n.requiredInvestmentItem,
+          SnackBarType.warning,
+        );
+      } else {
+        final String name = selectedCrypto?.name ?? "";
+
+        final double howMuch = double.parse(_howMuchTextController.text);
+        final double currentPrice = double.parse(_currentRangeController.text);
+        final double expect = double.parse(_expectingProfitController.text);
+
+        BlocProvider.of<HomeScreenBloc>(context).add(
+          CalculateWithPrice(
+            name,
+            currentPrice,
+            howMuch,
+            expect,
+            context,
+          ),
+        );
+        BlocProvider.of<HomeScreenBloc>(context).add(
+          HomeScreenStartEvent(
+            context,
+          ),
+        );
+      }
     }
   }
 

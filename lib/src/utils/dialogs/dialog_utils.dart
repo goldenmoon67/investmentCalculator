@@ -39,16 +39,18 @@ class DialogUtils {
   ) {
     CoolAlert.show(
       context: context,
-      widget: Column(
-        children: [
-          Image.asset("assets/images/placeholder_coin.png"),
-        ],
+      widget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset("assets/images/logo_reverse.png")),
       ),
       cancelBtnText: context.l10n.limitFullAlertDialogCancelBtn,
-      confirmBtnText: context.l10n.limitFullAlertDialogConfirmBtn,
+      confirmBtnText: context.l10n.ok,
       title: context.l10n.limitFullAlertDialogTitle,
-      type: CoolAlertType.confirm,
+      type: CoolAlertType.info,
       text: context.l10n.limitFullAlertDialogText,
+      animType: CoolAlertAnimType.slideInUp,
     );
   }
 }

@@ -46,6 +46,10 @@ class CalculateApi {
     _sliderPercent = percent;
   }
 
+  double? getSliderValue() {
+    return _sliderPercent;
+  }
+
   void setWhichPercent(bool wannaMore) {
     _wannaMore = wannaMore;
   }

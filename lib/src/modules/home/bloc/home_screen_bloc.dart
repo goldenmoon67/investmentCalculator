@@ -19,7 +19,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<CalculateWithPercent>(
         (event, emit) => _calculateWithPercent(event, emit));
     on<CalculateWithPrice>((event, emit) => _calculateWithPrice(event, emit));
-    on<SetSliderValue>((event, emit) => _getSliderValue(event, emit));
+    on<SetSliderValue>((event, emit) => _setSliderValue(event, emit));
     on<SetWhichPercent>((event, emit) => _setWhichPercent(event, emit));
   }
 
@@ -49,7 +49,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     }
   }
 
-  _getSliderValue(SetSliderValue event, Emitter<HomeScreenState> emit) {
+  _setSliderValue(SetSliderValue event, Emitter<HomeScreenState> emit) {
     _calculateRepositroy.setSliderPercent(event.percent);
   }
 
@@ -63,7 +63,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
           _cryptoRepository.getAllCryptos(event.context);
       var cryptos = await cryptosFuture;
       emit(HomeScreenStartData(cryptosFuture, cryptos));
-      debugPrint("calisiyoru");
     } catch (e) {
       emit(ErrorMessage(e.toString()));
     }

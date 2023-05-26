@@ -65,7 +65,11 @@
     "proAppFeatureWalletDesc":"Monitor the real-time profit/loss status of the coins you have added to your wallet. See how close you are to reaching your target.",
     "proAppFeatureFunctionsTitle":"More calculation functions.",
     "proAppFeatureFunctionsDesc":"Perform frequently needed calculations with the new functions at the touch of a button.",
-    "ok":"Okay"
+    "ok":"Okay",
+    "requiredField":"Required field",
+    "requiredInvestmentItem":"Investment can not be empty. Please pick your investment item.",
+    "requiredPercent":"Percent can not be empty. Please pick your profit margin."
+
 
 
 }

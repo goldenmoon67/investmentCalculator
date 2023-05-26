@@ -28,6 +28,10 @@ class Client {
     _calculateApi.setSliderPercent(percent);
   }
 
+  double? getSliderValue() {
+    return _calculateApi.getSliderValue();
+  }
+
   void setWhichPercent(bool wannaMore) {
     _calculateApi.setWhichPercent(wannaMore);
   }

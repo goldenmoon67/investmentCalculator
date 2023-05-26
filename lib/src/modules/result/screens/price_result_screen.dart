@@ -55,8 +55,7 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
             }
             _route();
           } else if (state is ResultScreenErrorState) {
-            DialogUtils.showSnackbar(
-                context, "Error", state.message, SnackBarType.error);
+            DialogUtils.showLimitFullDialog(context);
           }
         },
         builder: (context, state) {
@@ -142,7 +141,9 @@ class _PriceResultScreenState extends State<PriceResultScreen> {
     );
   }
 
-  void _route() {
+  Future<void> _route() async {
+    await Future.delayed(const Duration(seconds: 2));
+    // ignore: use_build_context_synchronously
     context.router.setRoot(const DashBoardRoute(children: [FavoriteRoute()]));
   }
 }
