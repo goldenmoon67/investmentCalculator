@@ -397,6 +397,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _onPressForPercent(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
     bool valid = formKey.currentState!.validate();
+    double? sliderValue;
     if (valid) {
       if (selectedCrypto == null) {
         DialogUtils.showSnackbar(
@@ -408,7 +409,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       } else {
         final CalculateRepositroy calculateRepositroy =
             getIt<CalculateRepositroy>();
-        double? sliderValue = calculateRepositroy.getSliderValue();
+        sliderValue = calculateRepositroy.getSliderValue();
         if (_percentController.text == "" && sliderValue == null) {
           DialogUtils.showSnackbar(
             context,
@@ -419,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         } else {
           final String name = selectedCrypto?.name ?? "";
           final double percent = _percentController.text == ""
-              ? 0
+              ? sliderValue!
               : double.parse(_percentController.text);
           final double currentPrice =
               double.parse(_currentRangeController.text);

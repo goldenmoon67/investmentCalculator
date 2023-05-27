@@ -32,10 +32,6 @@ class Client {
     return _calculateApi.getSliderValue();
   }
 
-  void setWhichPercent(bool wannaMore) {
-    _calculateApi.setWhichPercent(wannaMore);
-  }
-
   Future<List<String>> getCryptoNames(BuildContext context) async {
     return await _cryptoApi.getAllCryptoNames(context);
   }

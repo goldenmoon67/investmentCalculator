@@ -4,18 +4,13 @@ import 'package:crypto_price/src/data/models/result_models/price_result_model.da
 
 class CalculateApi {
   double? _sliderPercent;
-  bool _wannaMore = false;
 
   PercentResult calculateWithPercent(
     Crypto crypto,
     double currentRange,
     double percent,
   ) {
-    double lastPercent = _wannaMore == true
-        ? percent
-        : _wannaMore == false && _sliderPercent != null
-            ? _sliderPercent!
-            : 0;
+    double lastPercent = percent;
     double profit = currentRange * lastPercent / 100;
     double lastPrice = currentRange + profit;
 
@@ -48,9 +43,5 @@ class CalculateApi {
 
   double? getSliderValue() {
     return _sliderPercent;
-  }
-
-  void setWhichPercent(bool wannaMore) {
-    _wannaMore = wannaMore;
   }
 }

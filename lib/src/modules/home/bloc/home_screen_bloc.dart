@@ -20,7 +20,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         (event, emit) => _calculateWithPercent(event, emit));
     on<CalculateWithPrice>((event, emit) => _calculateWithPrice(event, emit));
     on<SetSliderValue>((event, emit) => _setSliderValue(event, emit));
-    on<SetWhichPercent>((event, emit) => _setWhichPercent(event, emit));
   }
 
   _calculateWithPercent(
@@ -51,10 +50,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   _setSliderValue(SetSliderValue event, Emitter<HomeScreenState> emit) {
     _calculateRepositroy.setSliderPercent(event.percent);
-  }
-
-  _setWhichPercent(SetWhichPercent event, Emitter<HomeScreenState> emit) {
-    _calculateRepositroy.setWhichPercent(event.wannaMore);
   }
 
   _getInitial(HomeScreenStartEvent event, Emitter<HomeScreenState> emit) async {

@@ -9,6 +9,4 @@ abstract class CalculateRepositroy {
       Crypto crypto, double currentPrice, double howMuch, expectingProfit);
   void setSliderPercent(double percent);
   double? getSliderValue();
-
-  void setWhichPercent(bool wannaMore);
 }

@@ -31,11 +31,6 @@ class CalculateRepositroyImpl extends CalculateRepositroy {
   }
 
   @override
-  void setWhichPercent(bool wannaMore) {
-    client.setWhichPercent(wannaMore);
-  }
-
-  @override
   double? getSliderValue() {
     return client.getSliderValue();
   }

@@ -118,9 +118,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               Text(
                                 widget.item.percentResult != null
                                     ? widget.item.percentResult!.percentWeWant
-                                        .toStringAsFixed(3)
+                                        .toStringAsFixed(1)
                                     : widget.item.priceResult!.expectingProfit
-                                        .toStringAsFixed(3),
+                                        .toStringAsFixed(1),
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,

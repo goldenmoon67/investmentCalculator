@@ -1,11 +1,9 @@
 import 'package:crypto_price/src/consts/colors/app_colors.dart';
 import 'package:crypto_price/src/l10n/l10n.dart';
-import 'package:crypto_price/src/modules/home/bloc/home_screen_bloc.dart';
 import 'package:crypto_price/src/utils/validators/input_validators.dart';
 import 'package:crypto_price/src/widgets/inputs/slider.dart';
 import 'package:crypto_price/src/widgets/inputs/text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PercentTabView extends StatefulWidget {
   final TextEditingController percentController;
@@ -52,9 +50,7 @@ class _PercentTabViewState extends State<PercentTabView> {
                           child: InkWell(
                             onTap: () {
                               wannaMore = true;
-                              BlocProvider.of<HomeScreenBloc>(context).add(
-                                SetWhichPercent(wannaMore),
-                              );
+
                               setState(() {});
                             },
                             child: Padding(
@@ -97,9 +93,7 @@ class _PercentTabViewState extends State<PercentTabView> {
                           child: InkWell(
                             onTap: () {
                               wannaMore = false;
-                              BlocProvider.of<HomeScreenBloc>(context).add(
-                                SetWhichPercent(wannaMore),
-                              );
+
                               setState(() {});
                             },
                             child: Padding(

@@ -46,7 +46,7 @@
    },
    "nameValidatorValue":"Please Enter a right name",
    "priceValidatorDotComma":"Please use (.) not (,)",
-   "percentValidatorValue": "Please Enter a right percent number",
+   "percentValidatorValue": "Please enter a valid value"
    "limitFullAlertDialogText": "Your limit is full. You can download Investor Pro and use unlimitless.",
    "limitFullAlertDialogTitle":"Ooops!",
    "limitFullAlertDialogConfirmBtn":"Download",
