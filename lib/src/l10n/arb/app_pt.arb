@@ -46,7 +46,7 @@
 },
 "nameValidatorValue":"Por favor, insira um nome correto",
 "priceValidatorDotComma":"Por favor, use (.) em vez de (,)",
-"percentValidatorValue": : "Por favor, insira um valor válido"
+"percentValidatorValue": "Por favor, insira um valor válido",
 "limitFullAlertDialogText": "Seu limite está completo. Você pode baixar o Investidor Pro e usar sem limites.",
 "limitFullAlertDialogTitle":"Ops!",
 "limitFullAlertDialogConfirmBtn":"Baixar",

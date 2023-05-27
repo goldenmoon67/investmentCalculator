@@ -17,144 +17,147 @@ class ProAppFeatures extends StatelessWidget {
       fontSize: 35.0,
       fontFamily: 'Horizon',
     );
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(3),
+    return RepaintBoundary(
       child: Container(
         color: Colors.white,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.blueColor,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 35,
-                          width: 100,
-                          child: DefaultTextStyle(
-                            style: const TextStyle(
-                              fontSize: 35.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            child: AnimatedTextKit(
-                              repeatForever: true,
-                              animatedTexts: [
-                                ColorizeAnimatedText(
-                                  context.l10n.very,
-                                  textStyle: colorizeTextStyle,
-                                  colors: colorizeColors,
-                                ),
-                                ColorizeAnimatedText(
-                                  context.l10n.very,
-                                  textStyle: colorizeTextStyle,
-                                  colors: colorizeColors,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 35,
-                          child: DefaultTextStyle(
-                            style: const TextStyle(
-                              fontSize: 35.0,
-                              fontFamily: 'Canterbury',
-                              fontWeight: FontWeight.bold,
-                            ),
-                            child: AnimatedTextKit(
-                              repeatForever: true,
-                              animatedTexts: [
-                                ColorizeAnimatedText(
-                                  context.l10n.soon,
-                                  textStyle: colorizeTextStyle,
-                                  colors: colorizeColors,
-                                ),
-                                ColorizeAnimatedText(
-                                  context.l10n.soon,
-                                  textStyle: colorizeTextStyle,
-                                  colors: colorizeColors,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+        padding: const EdgeInsets.all(3),
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.blueColor,
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
-                  Center(
-                    child: SizedBox(
-                      height: 120,
-                      child: Image.asset(
-                        "assets/images/logo_reverse.png",
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            width: 100,
+                            child: DefaultTextStyle(
+                              style: const TextStyle(
+                                fontSize: 35.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              child: AnimatedTextKit(
+                                repeatForever: true,
+                                animatedTexts: [
+                                  ColorizeAnimatedText(
+                                    context.l10n.very,
+                                    textStyle: colorizeTextStyle,
+                                    colors: colorizeColors,
+                                  ),
+                                  ColorizeAnimatedText(
+                                    context.l10n.very,
+                                    textStyle: colorizeTextStyle,
+                                    colors: colorizeColors,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 35,
+                            child: DefaultTextStyle(
+                              style: const TextStyle(
+                                fontSize: 35.0,
+                                fontFamily: 'Canterbury',
+                                fontWeight: FontWeight.bold,
+                              ),
+                              child: AnimatedTextKit(
+                                repeatForever: true,
+                                animatedTexts: [
+                                  ColorizeAnimatedText(
+                                    context.l10n.soon,
+                                    textStyle: colorizeTextStyle,
+                                    colors: colorizeColors,
+                                  ),
+                                  ColorizeAnimatedText(
+                                    context.l10n.soon,
+                                    textStyle: colorizeTextStyle,
+                                    colors: colorizeColors,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                children: [
-                  _buildFeatureItem(
-                    icon: Icons.camera_alt,
-                    title: context.l10n.proAppFeatureRealDataTitle,
-                    description: context.l10n.proAppFeatureRealDataDesc,
-                    isDarkCard: false,
-                    imagePath: "assets/images/cmc.png",
-                  ),
-                  const SizedBox(height: 8),
-                  _buildFeatureItem(
-                    icon: Icons.notifications_active,
-                    title: context.l10n.proAppFeatureRealNotiTitle,
-                    description: context.l10n.proAppFeatureRealNotiDesc,
-                    isDarkCard: true,
-                    imagePath: "assets/images/noti.png",
-                  ),
-                  const SizedBox(height: 8),
-                  _buildFeatureItem(
-                    icon: Icons.calendar_today,
-                    title: context.l10n.proAppFeatureWalletTitle,
-                    description: context.l10n.proAppFeatureWalletDesc,
-                    isDarkCard: false,
-                    imagePath: "assets/images/wallet.png",
-                  ),
-                  const SizedBox(height: 8),
-                  _buildFeatureItem(
-                    icon: Icons.calendar_today,
-                    title: context.l10n.proAppFeatureFunctionsTitle,
-                    description: context.l10n.proAppFeatureFunctionsDesc,
-                    isDarkCard: false,
-                    imagePath: "assets/images/calc.png",
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                    child: Text(
-                      context.l10n.ok,
+                    Center(
+                      child: SizedBox(
+                        height: 120,
+                        child: Image.asset(
+                          "assets/images/logo_reverse.png",
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  children: [
+                    _buildFeatureItem(
+                      icon: Icons.camera_alt,
+                      title: context.l10n.proAppFeatureRealDataTitle,
+                      description: context.l10n.proAppFeatureRealDataDesc,
+                      isDarkCard: false,
+                      imagePath: "assets/images/cmc.png",
+                    ),
+                    const SizedBox(height: 8),
+                    _buildFeatureItem(
+                      icon: Icons.notifications_active,
+                      title: context.l10n.proAppFeatureRealNotiTitle,
+                      description: context.l10n.proAppFeatureRealNotiDesc,
+                      isDarkCard: true,
+                      imagePath: "assets/images/noti.png",
+                    ),
+                    const SizedBox(height: 8),
+                    _buildFeatureItem(
+                      icon: Icons.calendar_today,
+                      title: context.l10n.proAppFeatureWalletTitle,
+                      description: context.l10n.proAppFeatureWalletDesc,
+                      isDarkCard: false,
+                      imagePath: "assets/images/wallet.png",
+                    ),
+                    const SizedBox(height: 8),
+                    _buildFeatureItem(
+                      icon: Icons.calendar_today,
+                      title: context.l10n.proAppFeatureFunctionsTitle,
+                      description: context.l10n.proAppFeatureFunctionsDesc,
+                      isDarkCard: false,
+                      imagePath: "assets/images/calc.png",
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      },
+                      child: Text(
+                        context.l10n.ok,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

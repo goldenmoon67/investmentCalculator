@@ -19,7 +19,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: buildTheme(Brightness.light),
+      debugShowCheckedModeBanner: false,
+
+      theme: buildTheme(
+        Brightness.light,
+      ),
       routerDelegate: _appRouter.delegate(
         initialRoutes: [const DashBoardRoute()],
       ),
