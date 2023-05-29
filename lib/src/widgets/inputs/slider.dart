@@ -25,6 +25,7 @@ class _SliderWidgetState extends State<SliderWidget> {
       showTicks: true,
       showLabels: true,
       enableTooltip: true,
+      stepSize: 1,
       minorTicksPerInterval: 1,
       onChanged: (dynamic value) {
         setState(() {
