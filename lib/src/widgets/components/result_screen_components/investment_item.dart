@@ -25,7 +25,14 @@ class InvestmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(imageUrl);
+    String? formattedValue;
+    if (currentRange < 0.01) {
+      formattedValue = currentRange.toStringAsFixed(9);
+    } else if (currentRange < 100) {
+      formattedValue = currentRange.toStringAsFixed(3);
+    } else {
+      formattedValue = currentRange.toStringAsFixed(0);
+    }
     return ListTile(
       leading: AspectRatio(
         aspectRatio: 1,
@@ -64,10 +71,10 @@ class InvestmentItem extends StatelessWidget {
                 )
               : const SizedBox(),
           const SizedBox(
-            width: 48,
+            width: 10,
           ),
           Text(
-            "\$ ${currentRange.toStringAsFixed(3)}",
+            "\$ $formattedValue",
           ),
         ],
       ),
