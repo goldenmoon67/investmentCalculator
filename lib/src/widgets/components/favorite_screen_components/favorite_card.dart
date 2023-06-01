@@ -188,7 +188,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 20,
-                  horizontal: MediaQuery.of(context).size.width / 10),
+                  horizontal: MediaQuery.of(context).size.width / 20),
               child: Row(
                 children: [
                   Icon(
